@@ -72,9 +72,9 @@ class ChartComponent extends React.Component {
 	{
 
 		//this.setState({fakedata});
-		getData().then(data => {
-			this.setState({ data })
-		})
+		// getData().then(data => {
+		// 	this.setState({ data })
+		// })
 	}
 
 	componentDidUpdate() {
@@ -82,45 +82,75 @@ class ChartComponent extends React.Component {
 	}
 
 	render() {
-		if (this.state == null) {
-			return <div>Loading...</div>
+		// if (this.state == null) {
+		// 	return <div>Loading...</div>
+		// }
+
+		if (this.state != null)
+		{
+			return 				<div>
+
+			<div class="navbar">
+			<a href="#home">Home</a>
+			<a href="#news">News</a>
+			<div class="dropdown">
+				<button class="dropbtn">Dropdown 
+				<i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+				<a onClick={() => getData().then(data => {this.setState({data})})}>Link 1</a>
+				<a onClick={() => getData2().then(data => {this.setState({data})})}>Link 2</a>
+				<a >Link 3</a>
+				</div>
+			</div> 
+		</div>
+			<div>
+				{/* File Uploader */}
+				<input
+					id="fileinput"
+					type="file"
+					name="file"
+					accept=".csv"
+					onChange={e => { loaddata(this,e); datachange(this) }}
+					style={{ display: "block", margin: "10px auto" }}
+				/>
+			</div>
+
+			<TypeChooser>{type => <Chart type={type} data={this.state.data} />}</TypeChooser>
+		</div>
+		
 		}
 		return (
 			<div>
 
-				<div class="navbar">
-				<a href="#home">Home</a>
-				<a href="#news">News</a>
-				<div class="dropdown">
-					<button class="dropbtn">Dropdown 
-					<i class="fa fa-caret-down"></i>
-					</button>
-					<div class="dropdown-content">
-					<a onClick={() => getData().then(data => {this.setState({data})})}>Link 1</a>
-					<a onClick={() => getData2().then(data => {this.setState({data})})}>Link 2</a>
-					<a >Link 3</a>
-					</div>
-				</div> 
-			</div>
-				<div>
-					{/* File Uploader */}
-					<input
-						id="fileinput"
-						type="file"
-						name="file"
-						accept=".csv"
-						onChange={e => { loaddata(this,e); datachange(this) }}
-						style={{ display: "block", margin: "10px auto" }}
-					/>
+			<div class="navbar">
+			<a href="#home">Home</a>
+			<a href="#news">News</a>
+			<div class="dropdown">
+				<button class="dropbtn">Dropdown 
+				<i class="fa fa-caret-down"></i>
+				</button>
+				<div class="dropdown-content">
+				<a onClick={() => getData().then(data => {this.setState({data})})}>Link 1</a>
+				<a onClick={() => getData2().then(data => {this.setState({data})})}>Link 2</a>
+				<a >Link 3</a>
 				</div>
-
-			<TypeChooser>
-				{type => <Chart type={type} data={this.state.data} />}
-			</TypeChooser>
-
-
-
+			</div> 
+		</div>
+			<div>
+				{/* File Uploader */}
+				<input
+					id="fileinput"
+					type="file"
+					name="file"
+					accept=".csv"
+					onChange={e => { loaddata(this,e); datachange(this) }}
+					style={{ display: "block", margin: "10px auto" }}
+				/>
 			</div>
+
+			
+		</div>
 		)
 	}
 }
