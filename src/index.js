@@ -34,17 +34,58 @@ const loaddata = (prop,event) => {
 
 	//custom csv file parameter column from the csv producer in java; API doc:https://github.com/d3/d3-dsv:
 	const data = csvParseRows(fileReader.result, (d, i) => {
-		return {
-			date: +d[0], // convert first column to Date
-			close: +d[1],
-			rsiavggain: +d[2],
-			rsiavglose: +d[3], // convert fourth column to number
-			RSgainloseratio: +d[4],
-			RSIratio: +d[5],
-			volume: +d[6],
-			high: +d[7],
-			low: +d[8],
-			open: +d[9]
+		
+		//Enable this for the raw file produced by the data collection thread
+			// return {
+			// 	date: +d[0], // convert first column to Date
+			// 	close: +d[1],
+			// 	rsiavggain: +d[2],
+			// 	rsiavglose: +d[3], // convert fourth column to number
+			// 	RSgainloseratio: +d[4],
+			// 	RSIratio: +d[5],
+			// 	volume: +d[6],
+			// 	high: +d[7],
+			// 	low: +d[8],
+			// 	open: +d[9]
+			// 	};
+
+
+		//Enable this for the file produced by analysis thread
+			return {
+				date: +d[0], // convert first column to Date
+				close: +d[1],
+				volume:+d[2],
+			 	open: +d[3],
+			 	high: +d[4],
+				low: +d[5], 	
+			 	sigbuyvolstra: +d[6],
+			 	sigbuyblestra: +d[7],
+				sigsell: +d[8],
+			 	sigbuyvolcurlowstra: +d[9],
+			 	sigbuyblwlinecurlowstra: +d[10],
+			 	volma: +d[11],
+			 	volmavariance: +d[12],
+			 	RSIratio: +d[13],
+			 	buyvol: +d[14],
+			 	sellvol: +d[15],
+			 	buysellvolratio: +d[16],
+			 	sigvolestimatwithrsival: +d[17],
+			 	botwedgeplace: +d[18],
+			 	blwlineplace: +d[19],
+			 	pricema: +d[20],
+			 	pricema2: +d[21],
+			 	ATRwriteS: +d[22],
+			 	ATRtop: +d[23],
+			 	ATRlow: +d[24],
+			 	ATRbuysignal: +d[25],
+			 	ATRsellsignal: +d[26],
+			 	STupS: +d[27],
+			 	STdownS: +d[28],
+			 	STbuy: +d[29],
+			 	STsell: +d[30],
+			 	STfinalline: +d[31],
+			 	STfinalupS: +d[32],
+			 	STfinaldownS: +d[33]
 			};
 		});
 		
