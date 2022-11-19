@@ -53,11 +53,17 @@ const loaddata = (prop,event) => {
 		//Enable this for the file produced by analysis thread
 			return {
 				date: +d[0], // convert first column to Date
+				//regular candles
 				close: +d[1],
-				volume:+d[2],
+				high: +d[2],
 			 	open: +d[3],
-			 	high: +d[4],
-				low: +d[5], 	
+				low: +d[5],
+				// heiken ashi
+				open1: +d[34],
+				close1: +d[35],
+				high1: +d[36],
+				low1: +d[37],
+				volume: +d[4],
 			 	sigbuyvolstra: +d[6],
 			 	sigbuyblestra: +d[7],
 				sigsell: +d[8],
@@ -85,7 +91,13 @@ const loaddata = (prop,event) => {
 			 	STsell: +d[30],
 			 	STfinalline: +d[31],
 			 	STfinalupS: +d[32],
-			 	STfinaldownS: +d[33]
+			 	STfinaldownS: +d[33],
+				CElongS: +d[38],
+				CEShortS: +d[39],
+				pricevolS: +d[40],
+				sighdvertrsiS: +d[41]
+
+
 			};
 		});
 		
