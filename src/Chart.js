@@ -52,7 +52,9 @@ class CandleStickChart extends React.Component {
 						displayFormat={format(".2f")} />
 
 					<LineSeries yAccessor={d => d.pricema}/>
-					<LineSeries yAccessor={d => d.pricema2}/>
+					{/* <LineSeries yAccessor={d => d.pricema2}/> */}
+					<LineSeries yAccessor={d => d.EMA2S } stroke={"#ff00ff"}/>
+
 
 					{/* <LineSeries yAccessor={d => d.CElongS}/>
 					<LineSeries yAccessor={d => d.CEShortS}/> */}
@@ -71,8 +73,8 @@ class CandleStickChart extends React.Component {
 					<LineSeries yAccessor={d => d.STfinaldownS}/>
 
 					<LineSeries yAccessor={d => d.pricema}/>
-					<LineSeries yAccessor={d => d.pricema2}/>
-
+					{/* <LineSeries yAccessor={d => d.pricema2}/> */}
+					<LineSeries yAccessor={d => d.EMA2S} stroke={"#ff00ff"}/>
 
 					<MouseCoordinateY
 						at="right"
@@ -123,7 +125,7 @@ class CandleStickChart extends React.Component {
 
 				<Chart id={5}
 					yExtents={[0,400]}
-					height={125} origin={(w, h) => [0, h - 1000]}
+					height={125} origin={(w, h) => [0, h - 1300]}
 				>
 					<XAxis axisAt="bottom" orient="bottom" showTicks={false} outerTickSize={0} />
 					<YAxis axisAt="right"
@@ -143,9 +145,33 @@ class CandleStickChart extends React.Component {
 						/* labelStroke="#4682B4" - optional prop */
 						origin={[-40, 15]}/>
 				</Chart>
+
+				<Chart id={11}
+					yExtents={d => d.ATRwriteS}
+					height={125} origin={(w, h) => [0, h - 1150]}
+				>
+					<XAxis axisAt="bottom" orient="bottom" showTicks={false} outerTickSize={0} />
+					<YAxis axisAt="right"
+						orient="right"
+						tickValues={[25]}/>
+					<MouseCoordinateY
+						at="right"
+						orient="right"
+						displayFormat={format(".2f")} />
+
+					<RSISeries yAccessor={d => d.ATRwriteS} />
+					<SingleValueTooltip
+						yAccessor={d => d.ATRwriteS}
+						yLabel={`ATR Value`}
+						yDisplayFormat={format(".2f")}
+						/* valueStroke={atr14.stroke()} - optional prop */
+						/* labelStroke="#4682B4" - optional prop */
+						origin={[-40, 15]}/>
+				</Chart>
+
 				<Chart id={6}
-					yExtents={[0,30000]}
-					height={125} origin={(w, h) => [0, h - 1200]}
+					yExtents={d => d.volmavariance}
+					height={125} origin={(w, h) => [0, h - 1000]}
 				>
 					<XAxis axisAt="bottom" orient="bottom" showTicks={false} outerTickSize={0} />
 					<YAxis axisAt="right"
@@ -191,7 +217,7 @@ class CandleStickChart extends React.Component {
 				</Chart>
 
 				<Chart id={10} height={400}
-					yExtents={[d => d.sighdvertrsiS]}
+					yExtents={[d => d.sigsell]}
 					origin={(w, h) => [0, h - 530]}
 				>
 					{/* Brown */}

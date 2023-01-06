@@ -95,7 +95,8 @@ const loaddata = (prop,event) => {
 				CElongS: +d[38],
 				CEShortS: +d[39],
 				pricevolS: +d[40],
-				sighdvertrsiS: +d[41]
+				sighdvertrsiS: +d[41],
+				EMA2S: +d[42]
 
 
 			};
