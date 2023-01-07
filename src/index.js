@@ -4,12 +4,12 @@ import { render } from 'react-dom';
 import Chart from './Chart';
 import { getData } from "./utils"
 import { getData2} from "./utils2.js"
-
 import {  TypeChooser } from "react-stockcharts/lib/helper";
-
 import { tsvParse, csvParse, csv, csvFormat, csvParseRows } from  "d3-dsv";
-
 import './main.css';
+import {Navigation} from 'react-minimal-side-navigation';
+import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+
 
 var fakedata = 
 [{
@@ -175,35 +175,74 @@ class ChartComponent extends React.Component {
 		
 		}
 		return (
-			<div>
+		
 
-			<div class="navbar">
-			<a href="#home">Home</a>
-			<a href="#news">News</a>
-			<div class="dropdown">
-				<button class="dropbtn">Dropdown 
-				<i class="fa fa-caret-down"></i>
-				</button>
-				<div class="dropdown-content">
-				<a onClick={() => getData().then(data => {this.setState({data})})}>Link 1</a>
-				<a onClick={() => getData2().then(data => {this.setState({data})})}>Link 2</a>
-				<a >Link 3</a>
-				</div>
-			</div> 
-		</div>
-			<div>
-				{/* File Uploader */}
-				<input
-					id="fileinput"
-					type="file"
-					name="file"
-					accept=".csv"
-					onChange={e => { loaddata(this,e); datachange(this) }}
-					style={{ display: "block", margin: "10px auto" }}
-				/>
+
+		<div>
+
+			<div class="sidebar">
+			<Navigation
+				// you can use your own router's api to get pathname
+				activeItemId="/management/members"
+				onSelect={({itemId}) => {
+				// maybe push to the route
+				}}
+				items={[
+				{
+					title: 'Dashboard',
+					itemId: '/dashboard',
+					// you can use your own custom Icon component as well
+					// icon is optional
+					elemBefore: () => <div name="inbox" />,
+				},
+				{
+					title: 'Management',
+					itemId: '/management',
+					elemBefore: () => <div name="users" />,
+					subNav: [
+					{
+						title: 'Projects',
+						itemId: '/management/projects',
+					},
+					{
+						title: 'Members',
+						itemId: '/management/members',
+					},
+					],
+				},
+				{
+					title: 'Another Item',
+					itemId: '/another',
+					subNav: [
+					{
+						title: 'Teams',
+						itemId: '/management/teams',
+					},
+					],
+				},
+				]}
+			/>
+			
 			</div>
 
-			
+			<div class="body1">
+					{/* File Uploader */}
+					<input
+						id="fileinput"
+						type="file"
+						name="file"
+						accept=".csv"
+						onChange={e => { loaddata(this,e); datachange(this) }}
+						
+					/>
+
+					<div>
+
+					
+					
+					</div>
+			</div>
+
 		</div>
 		)
 	}
