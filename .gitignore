@@ -5,6 +5,7 @@
 !/node_modules/react-stockcharts/
 /.pnp
 .pnp.js
+/package-lock.json
 
 # testing
 /coverage
