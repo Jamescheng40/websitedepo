@@ -5,25 +5,25 @@ import Chart from './Chart';
 import { getData } from "./utils"
 import { getData2} from "./utils2.js"
 import {  TypeChooser } from "react-stockcharts/lib/helper";
-import { tsvParse, csvParse, csv, csvFormat, csvParseRows } from  "d3-dsv";
+import {  csvParseRows } from  "d3-dsv";
 import './main.css';
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 
 
-var fakedata = 
-[{
-    "date": "2010-01-04T05:00:00.000Z",
-    "open": 25.436282332605284,
-    "high": 25.835021381744056,
-    "low": 25.411360259406774,
-    "close": 25.710416,
-    "volume": 38409100,
-    "split": "",
-    "dividend": "",
-    "absoluteChange": "",
-    "percentChange": ""
-}];
+// var fakedata = 
+// [{
+//     "date": "2010-01-04T05:00:00.000Z",
+//     "open": 25.436282332605284,
+//     "high": 25.835021381744056,
+//     "low": 25.411360259406774,
+//     "close": 25.710416,
+//     "volume": 38409100,
+//     "split": "",
+//     "dividend": "",
+//     "absoluteChange": "",
+//     "percentChange": ""
+// }];
 
 const loaddata = (prop,event) => {
 
@@ -225,7 +225,7 @@ class ChartComponent extends React.Component {
 			
 			</div>
 
-			<div class="body1">
+				    <div class="body1">
 					{/* File Uploader */}
 					<input
 						id="fileinput"
