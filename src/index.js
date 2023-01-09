@@ -9,6 +9,8 @@ import {  csvParseRows } from  "d3-dsv";
 import './main.css';
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+import {Link,BrowserRouter,Routes, Route  } from 'react-router-dom';
+
 
 
 // var fakedata = 
@@ -24,6 +26,7 @@ import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 //     "absoluteChange": "",
 //     "percentChange": ""
 // }];
+
 
 const loaddata = (prop,event) => {
 
@@ -119,12 +122,117 @@ const datachange = (prop) => {
 	//getData2().then(data => {prop.setState({data})});
 
 };
+const About = () => (
+	<div class="body1">
+	<div>
+	  <h2>About</h2>
+	</div>
+	</div>
+  );
+
+function Sidebarnav(){
+
+		return(
+	<div class="sidebar">
+	<Navigation
+		// you can use your own router's api to get pathname
+		activeItemId="/management/members"
+		onSelect={({itemId}) => {
+			// maybe push to the route
+
+			
+			window.location.href = websitedefaultsite + itemId;
+
+			//window.location.href = window.location.href + itemId.slice(1);	
+
+		}}
+		items={[
+		{
+			title: 'Dashboard',
+			itemId: 'dashboard',
+			// you can use your own custom Icon component as well
+			// icon is optional
+			elemBefore: () => <div name="inbox" />,
+		},
+		{
+			title: 'Management',
+			itemId: 'management',
+			elemBefore: () => <div name="users" />,
+			subNav: [
+			{
+				title: 'Projects',
+				itemId: 'management/projects',
+			},
+			{
+				title: 'Members',
+				itemId: 'management/members',
+			},
+			],
+		},
+		{
+			title: 'Stock Market CSV parser for fun',
+			itemId: 'fileinput',
+			subNav: [
+			{
+				title: 'Teams',
+				itemId: '/management/teams',
+			},
+			],
+		},
+		]}
+		
+	/>
+	
+	</div>
+)
+
+}
+
+  function NotFound() {
+	return (
+	<div>
+	<h1>Oops! You seem to be lost.</h1>
+	<p>Here are some helpful links:</p>
+	<Link to='/'>Home</Link>
+	<Link to='/blog'>Blog</Link>
+				<Link to='/contact'>Contact</Link>
+	</div>
+	)
+	}
+function Fileinputbtn() {
+	return(
+	<div class="body1">
+	<div>
+		<input
+			id="fileinput"
+			type="file"
+			name="file"
+			accept=".csv"
+			onChange={e => { loaddata(this,e); datachange(this) }}
+			
+		>
+		</input>
+		
+	</div>
+	</div>
+	)
+}
+
+var websitedefaultsite = window.location.href;
+var start = 2
+var delimiter = '/'
+
+var tokens2 = websitedefaultsite.split(delimiter).slice(0, start),
+websitedefaultsite = tokens2.join(delimiter); // this
+
 
 class ChartComponent extends React.Component {
 
+	
 	componentDidMount() 
 	{
-
+		//console.log("from mount" + window.location.href);
+		//websitedefaultsite = 
 		//this.setState({fakedata});
 		// getData().then(data => {
 		// 	this.setState({ data })
@@ -139,10 +247,11 @@ class ChartComponent extends React.Component {
 		// if (this.state == null) {
 		// 	return <div>Loading...</div>
 		// }
-
 		if (this.state != null)
 		{
-			return 				<div>
+			return 		
+
+		<div>
 
 			<div class="navbar">
 			<a href="#home">Home</a>
@@ -176,74 +285,19 @@ class ChartComponent extends React.Component {
 		}
 		return (
 		
-
+			<BrowserRouter>
 
 		<div>
-
-			<div class="sidebar">
-			<Navigation
-				// you can use your own router's api to get pathname
-				activeItemId="/management/members"
-				onSelect={({itemId}) => {
-				// maybe push to the route
-				}}
-				items={[
-				{
-					title: 'Dashboard',
-					itemId: '/dashboard',
-					// you can use your own custom Icon component as well
-					// icon is optional
-					elemBefore: () => <div name="inbox" />,
-				},
-				{
-					title: 'Management',
-					itemId: '/management',
-					elemBefore: () => <div name="users" />,
-					subNav: [
-					{
-						title: 'Projects',
-						itemId: '/management/projects',
-					},
-					{
-						title: 'Members',
-						itemId: '/management/members',
-					},
-					],
-				},
-				{
-					title: 'Another Item',
-					itemId: '/another',
-					subNav: [
-					{
-						title: 'Teams',
-						itemId: '/management/teams',
-					},
-					],
-				},
-				]}
-			/>
-			
-			</div>
-
-				    <div class="body1">
-					{/* File Uploader */}
-					<input
-						id="fileinput"
-						type="file"
-						name="file"
-						accept=".csv"
-						onChange={e => { loaddata(this,e); datachange(this) }}
-						
-					/>
-
-					<div>
-
-					
-					
-					</div>
-			</div>
+						<Routes>
+							<Route path='/about' element={<><Sidebarnav/><About/></>} />
+							<Route path='/fileinput' element={<><Sidebarnav/><Fileinputbtn/></>} />
+							{/* todo: add the default page here */}
+							<Route path='/' element={<><Sidebarnav/><About/></>} />
+							<Route path='*' element={<NotFound />}/>
+						</Routes>
 
 		</div>
+		</BrowserRouter>
 		)
 	}
 }
