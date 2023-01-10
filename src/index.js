@@ -10,8 +10,7 @@ import './main.css';
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import {Link,BrowserRouter,Routes, Route  } from 'react-router-dom';
-
-
+import Home from './LSTMderivation'
 
 // var fakedata = 
 // [{
@@ -124,11 +123,19 @@ const datachange = (prop) => {
 };
 const About = () => (
 	<div class="body1">
-	<div>
-	  <h2>About</h2>
+		<div>
+		<h2>About</h2>
+		</div>
 	</div>
-	</div>
-  );
+);
+
+const Homeroute = () => (
+<div class="body1">
+
+	<Home/>
+</div>
+
+);
 
 function Sidebarnav(){
 
@@ -148,11 +155,33 @@ function Sidebarnav(){
 		}}
 		items={[
 		{
-			title: 'Dashboard',
-			itemId: 'dashboard',
+			title: 'LSTM Full derivation',
+			itemId: 'LSTMderivation',
 			// you can use your own custom Icon component as well
 			// icon is optional
 			elemBefore: () => <div name="inbox" />,
+			subNav: [
+				{
+					title: 'Gradient E with Respect to Wout',
+					itemId: 'LSTMderivation/dEwrtdWo',
+				},
+				{
+					title: 'Gradient E with Respect to Win(input)',
+					itemId: 'LSTMderivation/dEwrtdWi',
+				},
+				{
+					title: 'Gradient E with Respect to Wc(internal state)',
+					itemId: 'LSTMderivation/dEwrtdWc',
+				},
+				{
+					title: 'Gradient E with Respect to Wforget',
+					itemId: 'LSTMderivation/dEwrtdWf',
+				},
+				{
+					title: 'Gradient E with Respect to Wv',
+					itemId: 'LSTMderivation/dEwrtdWv',
+				},
+				],
 		},
 		{
 			title: 'Management',
@@ -291,6 +320,7 @@ class ChartComponent extends React.Component {
 						<Routes>
 							<Route path='/about' element={<><Sidebarnav/><About/></>} />
 							<Route path='/fileinput' element={<><Sidebarnav/><Fileinputbtn/></>} />
+							<Route path='/LSTMderivation' element={<><Sidebarnav/><Homeroute/></>} />
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
 							<Route path='*' element={<NotFound />}/>
