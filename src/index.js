@@ -10,7 +10,8 @@ import './main.css';
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import {Link,BrowserRouter,Routes, Route  } from 'react-router-dom';
-import Home from './LSTMderivation'
+import Home from './LSTMcollection/LSTMderivation'
+import LSTMdEoverdWi from './LSTMcollection/LSTMdEoverdWi'
 
 // var fakedata = 
 // [{
@@ -137,6 +138,15 @@ const Homeroute = () => (
 
 );
 
+const LSTMdEoverdWiroute = () => (
+	<div class="body2">
+	
+		<LSTMdEoverdWi/>
+	</div>
+	
+	);
+	
+
 function Sidebarnav(){
 
 		return(
@@ -184,19 +194,9 @@ function Sidebarnav(){
 				],
 		},
 		{
-			title: 'Management',
-			itemId: 'management',
-			elemBefore: () => <div name="users" />,
-			subNav: [
-			{
-				title: 'Projects',
-				itemId: 'management/projects',
-			},
-			{
-				title: 'Members',
-				itemId: 'management/members',
-			},
-			],
+			title: 'Math Basics',
+			itemId: 'mathbasics',
+			elemBefore: () => <div name="users" />
 		},
 		{
 			title: 'Stock Market CSV parser for fun',
@@ -321,8 +321,10 @@ class ChartComponent extends React.Component {
 							<Route path='/about' element={<><Sidebarnav/><About/></>} />
 							<Route path='/fileinput' element={<><Sidebarnav/><Fileinputbtn/></>} />
 							<Route path='/LSTMderivation' element={<><Sidebarnav/><Homeroute/></>} />
+							<Route path='/LSTMderivation/dEwrtdWi' element={<><Sidebarnav/><LSTMdEoverdWiroute/></>} />
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
+							<Route path='/mathbasics' element={<><Sidebarnav/><About/></>} />
 							<Route path='*' element={<NotFound />}/>
 						</Routes>
 

@@ -5,7 +5,6 @@ import img2 from './LSTMcellarchitecture.JPG'
 import img3 from './gorhdef.JPG'
 import img4 from './internalstate.JPG'
 import img5 from './LSTMhiddenstate.JPG'
-import './main.css';
 
 function Home(){
     return (
