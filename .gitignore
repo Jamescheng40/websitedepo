@@ -3,6 +3,8 @@
 # dependencies
 /node_modules/*
 !/node_modules/react-stockcharts/
+!/node_modules/better-react-mathjax/
+!/node_modules/mathjax-full/
 /.pnp
 .pnp.js
 /package-lock.json
