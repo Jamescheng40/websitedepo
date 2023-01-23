@@ -12,6 +12,7 @@ import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import {Link,BrowserRouter,Routes, Route  } from 'react-router-dom';
 import Home from './LSTMcollection/LSTMderivation'
 import LSTMdEoverdWi from './LSTMcollection/LSTMdEoverdWi'
+import Mathtest from './LSTMcollection/test'
 
 // var fakedata = 
 // [{
@@ -127,6 +128,12 @@ const About = () => (
 		<div>
 		<h2>About</h2>
 		</div>
+	</div>
+);
+
+const Testforothestuff = () => (
+	<div class="body1">
+      <Mathtest/>
 	</div>
 );
 
@@ -325,6 +332,7 @@ class ChartComponent extends React.Component {
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
 							<Route path='/mathbasics' element={<><Sidebarnav/><About/></>} />
+							<Route path='/test' element={<><Sidebarnav/><Testforothestuff/></>} />
 							<Route path='*' element={<NotFound />}/>
 						</Routes>
 
