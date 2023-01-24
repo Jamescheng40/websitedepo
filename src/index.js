@@ -12,6 +12,7 @@ import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import {Link,BrowserRouter,Routes, Route  } from 'react-router-dom';
 import Home from './LSTMcollection/LSTMderivation'
 import LSTMdEoverdWi from './LSTMcollection/LSTMdEoverdWi'
+import LSTMdEoverdWf from './LSTMcollection/LSTMdEoverdWf'
 import Mathtest from './LSTMcollection/test'
 
 // var fakedata = 
@@ -153,6 +154,13 @@ const LSTMdEoverdWiroute = () => (
 	
 	);
 	
+const LSTMdEoverdWfroute = () => (
+	<div class="body2">
+	
+		<LSTMdEoverdWf/>
+	</div>
+	
+	);
 
 function Sidebarnav(){
 
@@ -329,6 +337,8 @@ class ChartComponent extends React.Component {
 							<Route path='/fileinput' element={<><Sidebarnav/><Fileinputbtn/></>} />
 							<Route path='/LSTMderivation' element={<><Sidebarnav/><Homeroute/></>} />
 							<Route path='/LSTMderivation/dEwrtdWi' element={<><Sidebarnav/><LSTMdEoverdWiroute/></>} />
+							<Route path='/LSTMderivation/dEwrtdWf' element={<><Sidebarnav/><LSTMdEoverdWfroute/></>} />
+							
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
 							<Route path='/mathbasics' element={<><Sidebarnav/><About/></>} />
