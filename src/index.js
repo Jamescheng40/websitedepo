@@ -14,6 +14,7 @@ import Home from './LSTMcollection/LSTMderivation'
 import LSTMdEoverdWi from './LSTMcollection/LSTMdEoverdWi'
 import LSTMdEoverdWf from './LSTMcollection/LSTMdEoverdWf'
 import Mathtest from './LSTMcollection/test'
+import LSTMdEoverdWc from './LSTMcollection/LSTMdEoverdWc'
 
 // var fakedata = 
 // [{
@@ -145,6 +146,14 @@ const Homeroute = () => (
 </div>
 
 );
+
+const LSTMdEoverdWcroute = () => (
+	<div class="body2">
+	
+		<LSTMdEoverdWc/>
+	</div>
+	
+	);
 
 const LSTMdEoverdWiroute = () => (
 	<div class="body2">
@@ -338,6 +347,7 @@ class ChartComponent extends React.Component {
 							<Route path='/LSTMderivation' element={<><Sidebarnav/><Homeroute/></>} />
 							<Route path='/LSTMderivation/dEwrtdWi' element={<><Sidebarnav/><LSTMdEoverdWiroute/></>} />
 							<Route path='/LSTMderivation/dEwrtdWf' element={<><Sidebarnav/><LSTMdEoverdWfroute/></>} />
+							<Route path='/LSTMderivation/dEwrtdWc' element={<><Sidebarnav/><LSTMdEoverdWcroute/></>} />
 							
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
