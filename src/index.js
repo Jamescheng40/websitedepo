@@ -15,6 +15,7 @@ import LSTMdEoverdWi from './LSTMcollection/LSTMdEoverdWi'
 import LSTMdEoverdWf from './LSTMcollection/LSTMdEoverdWf'
 import Mathtest from './LSTMcollection/test'
 import LSTMdEoverdWc from './LSTMcollection/LSTMdEoverdWc'
+import LSTMdEoverdWo from './LSTMcollection/LSTMdEoverdWo'
 
 // var fakedata = 
 // [{
@@ -154,6 +155,16 @@ const LSTMdEoverdWcroute = () => (
 	</div>
 	
 	);
+
+	
+const LSTMdEoverdWoroute = () => (
+	<div class="body2">
+	
+		<LSTMdEoverdWo/>
+	</div>
+	
+	);
+
 
 const LSTMdEoverdWiroute = () => (
 	<div class="body2">
@@ -348,9 +359,11 @@ class ChartComponent extends React.Component {
 							<Route path='/LSTMderivation/dEwrtdWi' element={<><Sidebarnav/><LSTMdEoverdWiroute/></>} />
 							<Route path='/LSTMderivation/dEwrtdWf' element={<><Sidebarnav/><LSTMdEoverdWfroute/></>} />
 							<Route path='/LSTMderivation/dEwrtdWc' element={<><Sidebarnav/><LSTMdEoverdWcroute/></>} />
+							<Route path='/LSTMderivation/dEwrtdWo' element={<><Sidebarnav/><LSTMdEoverdWoroute/></>} />
 							
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
+							
 							<Route path='/mathbasics' element={<><Sidebarnav/><About/></>} />
 							<Route path='/test' element={<><Sidebarnav/><Testforothestuff/></>} />
 							<Route path='*' element={<NotFound />}/>
