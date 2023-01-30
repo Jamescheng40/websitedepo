@@ -41,6 +41,12 @@ function LSTMdEoverdWo(){
   
       const dPoverdLi_final = "$$\\frac{\\partial P_i}{\\partial L_i} = \\begin{bmatrix} P_1 \\times (1 - P_1) & - P_1 \\times P_2 & \\cdots & -P_1 \\times P_T \\\\ -P_2 \\times P_1 & P_2 \\times (1 - P_2) & \\cdots & P_2 \\times P_T  \\\\ \\vdots & \\vdots & \\vdots & \\vdots \\\\ -P_T \\times P_1 & -P_T \\times P_2 & \\cdots & P_T \\times (1 - P_T) \\end{bmatrix} = P_i \\times (\\delta_{ij} - P_j ) $$"
       const kronica = "$$ \\delta_{ij} = \\begin{cases}1, &         \\text{if } i=j,\\\\0, &  \\text{if } i\\neq j.\\end{cases} $$"
+     
+      const dLoverdL1 = "$$ \\frac{\\partial L_i}{\\partial L1_{1}} = 1 $$"
+      //const equation = '    $$\\left[ \\begin{array}{cc|c} 1&2&3\\\\ 4&5&6  \\end{array} \\right] $$ ';
+      //const summation = '$$\\sigma_s{(\\sum_{i=0}^M W_f \\otimes x_t + bias(optional))} $$' 
+      const dL1overdL2 = "$$ \\frac{\\partial L1_1}{\\partial L2_1} =  \\begin{bmatrix} 1 & 1 & \\cdots & 1 \\end{bmatrix} \\ni 1 \\times M; \\; \\frac{\\partial L1_2}{\\partial L2_2} =  \\begin{bmatrix} 1 & 1 & \\cdots & 1 \\end{bmatrix} \\ni 1 \\times M \\cdots \\frac{\\partial L1_T}{\\partial L2_T} =  \\begin{bmatrix} 1 & 1 & \\cdots & 1 \\end{bmatrix} \\ni 1 \\times M $$"
+      
       const dL2overdhfinalproduct = "$$ \\frac{\\partial L2_1}{\\partial h_t} = \\begin{bmatrix} W_{{v}_{11}} & 0 & \\cdots & 0 \\\\ 0 & W_{{v}_{12}}  & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\vdots \\\\ 0 & 0 & \\cdots & W_{{v}_{1M}} \\end{bmatrix} = diag(W_{{v}_{1i}}) \\ni T \\times M $$"
       const dL22overdh2finalproduct = "$$\\frac{\\partial L2_2}{\\partial h_t} =\\begin{bmatrix} W_{{v}_{21}} & 0 & \\cdots & 0 \\\\ 0 & W_{{v}_{22}}  & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\vdots \\\\ 0 & 0 & \\cdots & W_{{v}_{2M}} \\end{bmatrix} = diag(W_{{v}_{2i}}) \\ni T \\times M  $$"
       const dL21overdh2timesdL2overdhfinalproduct = "$$ \\frac{\\partial L1_1}{\\partial L2_1} \\odot \\frac{\\partial L2_1}{\\partial h_t} = \\begin{bmatrix} 1 & 1 & \\cdots & 1 \\end{bmatrix} \\odot \\begin{bmatrix} W_{{v}_{11}} & 0 & \\cdots & 0 \\\\ 0 & W_{{v}_{12}}  & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\vdots \\\\ 0 & 0 & \\cdots & W_{{v}_{1M}} \\end{bmatrix} = \\begin{bmatrix} W_{{v}_{11}} & W_{{v}_{12}} & \\cdots & W_{{v}_{1M}}  \\end{bmatrix}  $$"
@@ -56,7 +62,7 @@ function LSTMdEoverdWo(){
       
       const dd13overd14t1imesd14overdWo = "$$ \\frac{\\partial d13_1}{\\partial d14_1} \\odot \\frac{\\partial d14_1}{\\partial W_o} = \\begin{bmatrix} 1 & 1 & \\cdots & 1 \\end{bmatrix} \\odot \\begin{bmatrix} x_1 & 0 & \\cdots & 0 & 0 & \\cdots & 0 & \\cdots & 0 \\\\ 0 & x_2 & \\cdots & 0 & 0 & \\cdots & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\ddots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots \\\\ 0 & 0 & \\cdots & x_N & 0 & \\cdots & 0 & \\cdots & 0 \\end{bmatrix} = \\begin{bmatrix} x_1 & x_2 & \\cdots & x_N & 0 & 0 & \\cdots & 0 & \\cdots & 0   \\end{bmatrix} \\ni 1 \\times MN $$"
       const dd13overd14timesd14overdWo = "$$ \\frac{\\partial d13_2}{\\partial d14_2} \\odot \\frac{\\partial d14_2}{\\partial W_o} = \\begin{bmatrix} 1 & 1 & \\cdots & 1 \\end{bmatrix} \\odot \\begin{bmatrix} 0 & 0 & \\cdots & 0 & x_1 & 0 & \\cdots & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 & 0 & x_2 & \\cdots &  0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\ddots & \\vdots & \\vdots & \\vdots \\\\ 0 & 0 & \\cdots & 0 & 0 & 0 & \\cdots & x_N & \\cdots & 0 \\end{bmatrix} = \\begin{bmatrix} 0 & 0 & \\cdots & 0 & x_1 & x_2 & \\cdots & x_N & \\cdots & 0   \\end{bmatrix} \\ni 1 \\times MN $$"
-      const ddoverd1timesd21overdWocombine1 = "$$ = \\begin{bmatrix} x_1 & x_2 & \\cdots & x_N & 0 & 0 & \\cdots & 0 & \\cdots & 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 & x_1 & x_2 & \\cdots & x_N & \\cdots &  0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots& \\vdots & \\vdots& \\vdots & \\vdots\\\\ 0 & 0 & \\cdots & 0 & 0 & 0 & \\cdots & 0 & \\cdots & x_1 & x_2 & \\cdots & x_N \\end{bmatrix} \\ni M \\times MN  $$"
+      const ddoverd1timesd21overdWocombine1 = "$$ \\frac{\\partial d13}{\\partial W_o} = \\frac{\\partial d13}{\\partial d14} \\odot \\frac{\\partial d14}{\\partial W_o} = \\begin{bmatrix} x_1 & x_2 & \\cdots & x_N & 0 & 0 & \\cdots & 0 & \\cdots & 0 & 0 & \\cdots & 0 \\\\ 0 & 0 & \\cdots & 0 & x_1 & x_2 & \\cdots & x_N & \\cdots &  0 & 0 & \\cdots & 0 \\\\ \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots & \\vdots& \\vdots & \\vdots& \\vdots & \\vdots\\\\ 0 & 0 & \\cdots & 0 & 0 & 0 & \\cdots & 0 & \\cdots & x_1 & x_2 & \\cdots & x_N \\end{bmatrix} \\ni M \\times MN  $$"
       
       const tequal3computenohighlightedwo = " $$  \\frac{\\partial E}{\\partial g} \\odot \\frac{\\partial g}{\\partial P_i} \\odot \\frac{\\partial P_i}{\\partial L_i} \\odot \\frac{\\partial L_i}{\\partial L1} \\odot \\frac{\\partial L1_i}{\\partial L2_i} \\odot \\frac{\\partial L2_i}{\\partial h_t} \\odot  ( \\frac{\\partial h_t}{\\partial b_t} \\odot \\frac{\\partial b_t}{\\partial C_t} \\odot \\frac{\\partial C_t}{\\partial a_t} \\odot \\frac{\\partial a_t}{\\partial C_\{t-1\}} \\odot ( \\frac{\\partial C_\{t-1\}}{\\partial a_\{t-1\}} \\odot \\frac{\\partial a_{t-1}}{\\partial C_{t-2}} \\odot ( {\\frac{\\partial a_{t-2}}{\\partial C_{t-2}} \\odot \\frac{\\partial a_{t-2}}{\\partial C_{t-3}}} \\odot(\\frac{\\partial C_{t-3}}{\\partial a_{t-3}} \\odot \\frac{\\partial a_{t-3}}{\\partial C_{t-4}} \\oplus { \\frac{\\partial h_{t-3}}{\\partial O_{t-3}}  \\odot \\frac{\\partial O_{t-3}}{\\partial d13_{t-3}} \\odot \\frac{\\partial d13_{t-3}}{\\partial d14_{t-3}} \\odot \\frac{\\partial d14_{t-3}}{\\partial W_o} } ) \\oplus \\frac{\\partial h_{t-2}}{\\partial O_{t-2}}  \\odot \\frac{\\partial O_{t-2}}{\\partial d13_{t-2}} \\odot \\frac{\\partial d13_{t-2}}{\\partial d14_{t-2}} \\odot \\frac{\\partial d14_{t-2}}{\\partial W_o} )\\oplus \\odot { \\frac{\\partial h_{t-1}}{\\partial O_{t-1}}  \\odot \\frac{\\partial O_{t-1}}{\\partial d13_{t-1}} \\odot \\frac{\\partial d13_{t-1}}{\\partial d14_{t-1}} \\odot \\frac{\\partial d14_{t-1}}{\\partial W_o} } ) \\oplus  \\odot { \\frac{\\partial h_{t}}{\\partial O_{t}}  \\odot \\frac{\\partial O_{t}}{\\partial d13_{t}} \\odot \\frac{\\partial d13_{t}}{\\partial d14_{t}} \\odot \\frac{\\partial d14_{t}}{\\partial W_o} } ) $$"
       const tequal3computehighlightedwo = " $$  \\frac{\\partial E}{\\partial g} \\odot \\frac{\\partial g}{\\partial P_i} \\odot \\frac{\\partial P_i}{\\partial L_i} \\odot \\frac{\\partial L_i}{\\partial L1} \\odot \\frac{\\partial L1_i}{\\partial L2_i} \\odot \\frac{\\partial L2_i}{\\partial h_t} \\odot  ( \\frac{\\partial h_t}{\\partial b_t} \\odot \\frac{\\partial b_t}{\\partial C_t} \\odot \\underline{\\textcolor{blue}{\\frac{\\partial C_t}{\\partial a_t} \\odot \\frac{\\partial a_t}{\\partial C_{t-1}}}} \\odot ( \\underline{\\textcolor{blue}{\\frac{\\partial C_{t-1}}{\\partial a_{t-1}} \\odot \\frac{\\partial a_{t-1}}{\\partial C_{t-2}}}} \\odot ( \\underline{\\textcolor{blue}{{\\frac{\\partial a_{t-2}}{\\partial C_{t-2}} \\odot \\frac{\\partial a_{t-2}}{\\partial C_{t-3}}}}} \\odot( \\cancelto{0}{\\frac{\\partial C_{t-3}}{\\partial a_{t-3}} \\odot \\frac{\\partial a_{t-3}}{\\partial C_{t-4}}} \\oplus { \\frac{\\partial h_{t-3}}{\\partial O_{t-3}}  \\odot \\frac{\\partial O_{t-3}}{\\partial d13_{t-3}} \\odot \\frac{\\partial d13_{t-3}}{\\partial d14_{t-3}} \\odot \\frac{\\partial d14_{t-3}}{\\partial W_o} } ) \\oplus \\frac{\\partial h_{t-2}}{\\partial O_{t-2}}  \\odot \\frac{\\partial O_{t-2}}{\\partial d13_{t-2}} \\odot \\frac{\\partial d13_{t-2}}{\\partial d14_{t-2}} \\odot \\frac{\\partial d14_{t-2}}{\\partial W_o} )\\oplus \\odot { \\frac{\\partial h_{t-1}}{\\partial O_{t-1}}  \\odot \\frac{\\partial O_{t-1}}{\\partial d13_{t-1}} \\odot \\frac{\\partial d13_{t-1}}{\\partial d14_{t-1}} \\odot \\frac{\\partial d14_{t-1}}{\\partial W_o} } ) \\oplus { \\frac{\\partial h_{t}}{\\partial O_{t}}  \\odot \\frac{\\partial O_{t}}{\\partial d13_{t}} \\odot \\frac{\\partial d13_{t}}{\\partial d14_{t}} \\odot \\frac{\\partial d14_{t}}{\\partial W_o} } ) $$"
@@ -69,8 +75,9 @@ function LSTMdEoverdWo(){
       const da1overdctm2wo = "$$ \\frac{\\partial a_{t-1}}{\\partial C_{t-2}} = \\frac{\\partial (F_{t-1} \\otimes C_{t-2})}{\\partial C_{t-2}} = diag(F_{t-1}) \\ni 1 \\times M  $$";
 
       const dctm1overdatm1 =  "$$ \\frac{\\partial C_{t-1}}{\\partial a_{t-1}} = 1 $$"
+      const dLioverdH = "$$ \\frac{\\partial L_i}{\\partial L1} \\odot \\frac{\\partial L1_i}{\\partial L2_i} \\odot \\frac{\\partial L2_i}{\\partial h_t}  $$"
+      const d13overdWo  = "$$  \\frac{\\partial d13}{\\partial W_o} = \\frac{\\partial d13}{\\partial d14} \\odot \\frac{\\partial d14}{\\partial W_o}  $$"
       
-
       return (
 
         <div>
@@ -125,36 +132,64 @@ function LSTMdEoverdWo(){
                 </MathJaxContext>
 
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The first part in purple has already been computed please check out this <a href="http://post">post</a> or this <a href="http://post1">post</a>&nbsp;for the full derivation of those equations. For this post, we will keep it simple and use only the final product from the derivation. The derivation is based on the softmax and logit. Those are needed in order to compute the scaled output from hidden units. In the original LSTM paper, it only has one output so their T is assumed to be one. But here we assume the output is T.</p>
+                
                 <MathJaxContext config={config} version={3}>
                     <MathJax inline>
                         {dEoverdG_j_final}
                         {dgoverdP_i_final}
                         {dPoverdLi_final}
                         {kronica}
+
+                    </MathJax>
+                </MathJaxContext>
+                
+                <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The next part until the next sub-title will compute the following formula</p>
+                <MathJaxContext config={config} version={3}>
+                    <MathJax inline>
+                        {dLioverdH}
+                    </MathJax>
+                </MathJaxContext>
+                <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; And the above formula will be expanded to</p>
+             
+                <MathJaxContext config={config} version={3}>
+                    <MathJax inline>
+                        {dLoverdL1}
+                        {dL1overdL2}
                         {dL2overdhfinalproduct}
                         {dL22overdh2finalproduct}
                         {dL21overdh2timesdL2overdhfinalproduct}
                         {dL22overdh2timesdL2overdhfinalproduct}
                         {dL2ioverdh2ifinalproduct}
-                    </MathJax>
+                        </MathJax>
                 </MathJaxContext>
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;As mentioned above, since we assumed the output contains T elements, the weight matrix should be stacked upto T elements</p>
 
-            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Let us continue to derive other equations</p>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Let us continue to derive other equations </p>
             <MathJaxContext config={config} version={3}>
                     <MathJax inline>
                         {dhttoverdOttwo}
                         {dOtoverd13wo}
-                        {dd13overd14wo}
-                        {d141overdwo}
-                        {d142overdWo}
-                        {dd13overd14t1imesd14overdWo}
-                        {dd13overd14timesd14overdWo}
-                        {ddoverd1timesd21overdWocombine1}
+
                     </MathJax>
                 </MathJaxContext>
 
-
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The next part until the next sub-title will compute the following formula</p>
+                <MathJaxContext config={config} version={3}>
+                    <MathJax inline>
+                        {d13overdWo}
+                    </MathJax>
+                </MathJaxContext>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; And the above formula will be expanded to</p>
+                <MathJaxContext config={config} version={3}>
+                        <MathJax inline>
+                            {dd13overd14wo}
+                            {d141overdwo}
+                            {d142overdWo}
+                            {dd13overd14t1imesd14overdWo}
+                            {dd13overd14timesd14overdWo}
+                            {ddoverd1timesd21overdWocombine1}
+                        </MathJax>
+                </MathJaxContext>
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Since we have M hidden units, we should stack the matrix upto M rows</p>
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Now let us try to see if we are at a different timestep and how the equations are going to expand out. Some of the equations would go deeper than initially would be. Let us see how this expanded out.</p>
 
