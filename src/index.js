@@ -192,9 +192,14 @@ function Sidebarnav(){
 		onSelect={({itemId}) => {
 			// maybe push to the route
 
-			
-			window.location.href = websitedefaultsite + itemId;
+			if(itemId == '')
+			{
 
+			}
+			else
+			{
+				window.location.href = websitedefaultsite + itemId;
+			}
 			//window.location.href = window.location.href + itemId.slice(1);	
 
 		}}
