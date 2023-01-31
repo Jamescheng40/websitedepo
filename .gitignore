@@ -5,6 +5,7 @@
 !/node_modules/react-stockcharts/
 !/node_modules/better-react-mathjax/
 !/node_modules/mathjax-full/
+!/node_modules/react-minimal-side-navigation/
 /.pnp
 .pnp.js
 /package-lock.json
