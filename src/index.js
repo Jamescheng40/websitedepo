@@ -206,7 +206,7 @@ function Sidebarnav(){
 		items={[
 		{
 			title: 'LSTM Full derivation',
-			itemId: 'LSTMderivation',
+			itemId: '',
 			// you can use your own custom Icon component as well
 			// icon is optional
 			elemBefore: () => <div name="inbox" />,
