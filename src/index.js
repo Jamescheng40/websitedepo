@@ -254,6 +254,10 @@ function Sidebarnav(){
 			elemBefore: () => <div name="inbox" />,
 			subNav: [
 				{
+					title:  'LSTM paper explanation',
+					itemId: 'LSTMderivation',
+				},
+				{
 					title: 'Gradient E with Respect to Wout',
 					itemId: 'LSTMderivation/dEwrtdWo',
 				},
