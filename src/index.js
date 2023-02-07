@@ -16,7 +16,9 @@ import LSTMdEoverdWf from './LSTMcollection/LSTMdEoverdWf'
 import Mathtest from './LSTMcollection/test'
 import LSTMdEoverdWc from './LSTMcollection/LSTMdEoverdWc'
 import LSTMdEoverdWo from './LSTMcollection/LSTMdEoverdWo'
-
+import LSTMfullimplementation from './LSTMcollection/LSTMfullimplementation'
+import LSTMdEoverdWv from './LSTMcollection/LSTMdEoverdWv'
+import LSTMbackward from './LSTMcollection/LSTMbackwardexplained'
 // var fakedata = 
 // [{
 //     "date": "2010-01-04T05:00:00.000Z",
@@ -165,6 +167,14 @@ const LSTMdEoverdWoroute = () => (
 	
 	);
 
+const LSTMfullderivationroute = () => (
+	<div class="body2">
+	
+		<LSTMfullimplementation/>
+	</div>
+
+);
+
 
 const LSTMdEoverdWiroute = () => (
 	<div class="body2">
@@ -180,6 +190,22 @@ const LSTMdEoverdWfroute = () => (
 		<LSTMdEoverdWf/>
 	</div>
 	
+	);
+
+const LSTMdEoverdWvroute = () => (
+	<div class="body2">
+	
+		<LSTMdEoverdWv/>
+	</div>
+	
+	);
+
+const LSTMbackwardroute = () => (
+	<div class="body2">
+	
+		<LSTMbackward/>
+	</div>
+
 	);
 
 function Sidebarnav(){
@@ -204,6 +230,22 @@ function Sidebarnav(){
 
 		}}
 		items={[
+		{
+			title: 'LSTM full implementation Catalog',
+			itemId: '',
+			subNav: [
+				{
+					title: 'LSTM entire Implementation in python',
+					itemId: 'LSTMimplementation',
+				},
+				{
+					title: 'LSTM Backward Implementation explained in details',
+					itemId: 'LSTMBackward',
+				},
+				
+			],
+
+		},
 		{
 			title: 'LSTM Full derivation',
 			itemId: '',
@@ -365,7 +407,10 @@ class ChartComponent extends React.Component {
 							<Route path='/LSTMderivation/dEwrtdWf' element={<><Sidebarnav/><LSTMdEoverdWfroute/></>} />
 							<Route path='/LSTMderivation/dEwrtdWc' element={<><Sidebarnav/><LSTMdEoverdWcroute/></>} />
 							<Route path='/LSTMderivation/dEwrtdWo' element={<><Sidebarnav/><LSTMdEoverdWoroute/></>} />
-							
+							<Route path='/LSTMimplementation' element={<><Sidebarnav/><LSTMfullderivationroute/></>} />
+							<Route path='/LSTMderivation/dEwrtdWv' element={<><Sidebarnav/><LSTMdEoverdWvroute/></>} />
+							<Route path='/LSTMBackward' element={<><Sidebarnav/><LSTMbackwardroute/></>} />
+
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
 							
