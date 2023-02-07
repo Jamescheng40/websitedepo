@@ -1,6 +1,7 @@
 import React from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco,dracula} from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import * as urlredirect from './redirectutil'
 function LSTMfullimplementation(){
 
 
@@ -55,7 +56,7 @@ function LSTMfullimplementation(){
                 {codeString3}
             </SyntaxHighlighter>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Next, we will code the forward block for the LSTM function, the LSTM function will follow the general formula as it can be found <a href="http://a">here</a>.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Next, we will code the forward block for the LSTM function, the LSTM function will follow the general formula as it can be found in the bottom of the page from <a href={urlredirect.derivationmainpage}>here</a>.</p>
 
 <SyntaxHighlighter language="python" style={dracula}>
                 {codeString4}
@@ -67,7 +68,7 @@ function LSTMfullimplementation(){
                 {codeString5}
             </SyntaxHighlighter>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The subsequent part will serve as an important optimization step and they are technically called the backpropagation optimization step. A lot of code in the following is followed from the Mathematical derivation from <a href="http://b">here</a></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The subsequent part will serve as an important optimization step and they are technically called the backpropagation optimization step. Since there are too many equations, we won't go through all the explanation on how the stuff work. Instead, we have created a separate page on how the backpropagation work. Please feel free to check out this page <a href={urlredirect.LSTMbackwardexplained}>here</a></p>
 
 <SyntaxHighlighter language="python" style={dracula}>
                 {codeString6}
@@ -98,7 +99,7 @@ function LSTMfullimplementation(){
 
             </SyntaxHighlighter>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Please check out the following for explaining how the code works and why it works, you can either find the link on the left navigation menu or <a href="http://c">here</a></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Please check out the following for explaining how the code works and why it works, you can either find the link on the left navigation menu</p>
 
        </div>
       )
