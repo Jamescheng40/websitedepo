@@ -2,6 +2,7 @@ import React from 'react';
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco,dracula} from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import * as urlredirect from './redirectutil'
 
 function LSTMbackward(){
     const config = {
@@ -94,7 +95,7 @@ return(
 
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;For this post, we will explore the computer science aspect of mathematical equations. Specifically, we will see how the equations expand and combine to become the line you see in python.&nbsp;</p>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;For readability, we recommend you open a new page from the <a href="http://b">math derivation</a> and the <a href="http://b">code page</a>. This post will be dedicated to the backward function or you can see in the code</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;For readability, we recommend you open a new page from the <a href={urlredirect.derivationmainpage}>math derivation</a> and the <a href={urlredirect.LSTMfullimple}>code page</a>. This post will be dedicated to the backward function or you can see in the code</p>
 
 <SyntaxHighlighter language="python" style={dracula}>
                 {codeString6}
@@ -148,7 +149,7 @@ return(
                 {Wvprecode}
             </SyntaxHighlighter>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Let us open the <strong>Wv</strong> derivation <a href="http://Wvderivation">page</a>. The final result requires we multiply the partial derivative of the loss function with the partial derivative of the logits function. Let us observe the following multiplication.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Let us open the <strong>Wv</strong> derivation <a href={urlredirect.Wvderivationpage}>page</a>. The final result requires we multiply the partial derivative of the loss function with the partial derivative of the logits function. Let us observe the following multiplication.</p>
 
 <MathJaxContext config={config} version={3}>
                     <MathJax inline>     
@@ -179,7 +180,7 @@ return(
 <p><span style={{fontSize:32.04}}>An explanation for <strong>Wo</strong> implementation</span></p>
 <ColoredLine color="#E3E3E3" />
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Next, let us move with the gradient for <strong>Wo&nbsp;</strong>matrix. For this section, we recommend you open up the <strong>Wo</strong> <a href="http://page2">derivation</a> page. As we know from the implementation, the&nbsp;<strong>Wo&nbsp;</strong>is computed as the following from the python code</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Next, let us move with the gradient for <strong>Wo&nbsp;</strong>matrix. For this section, we recommend you open up the <strong>Wo</strong> <a href={urlredirect.Woderivationpage}>derivation</a> page. As we know from the implementation, the&nbsp;<strong>Wo&nbsp;</strong>is computed as the following from the python code</p>
 
 <SyntaxHighlighter language="python" style={dracula}>
                 {woprecode}
@@ -229,7 +230,7 @@ return(
 <p><span style={{fontSize:32.04}}>An explanation for <strong>Wi</strong> implementation</span></p>
 <ColoredLine color="#E3E3E3" />
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Next, let us move with the function for <strong>Wi</strong>. For this section, we recommend you open up the <strong>Wi</strong>&nbsp;<a href="http://page2">derivation</a> page. As we know from the implementation, the&nbsp;<strong>Wi&nbsp;</strong>is computed as the following from the python code</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Next, let us move with the function for <strong>Wi</strong>. For this section, we recommend you open up the <strong>Wi</strong>&nbsp;<a href={urlredirect.Widerivationpage}>derivation</a> page. As we know from the implementation, the&nbsp;<strong>Wi&nbsp;</strong>is computed as the following from the python code</p>
 
 <SyntaxHighlighter language="python" style={dracula}>
                 {wiprecode}
@@ -280,7 +281,7 @@ return(
             </SyntaxHighlighter>
 
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;As usual, let us write down the formula. We recommend you open up the <strong>Wf</strong>&nbsp;<a href="http://page2">derivation</a> page to see all the derivations. But for this post, let us just write down the last formula from the page.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;As usual, let us write down the formula. We recommend you open up the <strong>Wf</strong>&nbsp;<a href={urlredirect.Wfderivationpage}>derivation</a> page to see all the derivations. But for this post, let us just write down the last formula from the page.</p>
 
 <MathJaxContext config={config} version={3}>
                     <MathJax inline>     
