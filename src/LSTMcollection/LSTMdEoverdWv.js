@@ -69,7 +69,7 @@ function LSTMdEoverdWv(){
             </MathJax>
                 </MathJaxContext>
 
-            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Since there are only two dependencies, the equations expansion will be straightforward and very easy. Let us take a look at how it expands for the first three terms. Detailed explanation please check out&nbsp;<a href="http://a">this</a> and <a href="http://b">this</a>. They are already computed in those posts so it would be straightforward to understand what it is going on.&nbsp;</p>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Since there are only two dependencies, the equations expansion will be straightforward and very easy. As usual, let us write down the derivation for the first two terms&nbsp;</p>
             <MathJaxContext config={config} version={3}>
                     <MathJax inline>
                     {dEoverdG_j_final}

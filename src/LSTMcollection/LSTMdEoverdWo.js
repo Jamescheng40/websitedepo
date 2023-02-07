@@ -132,7 +132,7 @@ function LSTMdEoverdWo(){
                     </MathJax>
                 </MathJaxContext>
 
-            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The first part in purple has already been computed please check out this <a href="http://post">post</a> or this <a href="http://post1">post</a>&nbsp;for the full derivation of those equations. For this post, we will keep it simple and use only the final product from the derivation. The derivation is based on the softmax and logit. Those are needed in order to compute the scaled output from hidden units. In the original LSTM paper, it only has one output so their T is assumed to be one. But here we assume the output is T.</p>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; The first two terms are commonly found in other derivation as well.Those are needed in order to compute the scaled output from hidden units. In the original LSTM paper, it only has one output so their T is assumed to be one. But here we assume the output is T.</p>
                 
                 <MathJaxContext config={config} version={3}>
                     <MathJax inline>

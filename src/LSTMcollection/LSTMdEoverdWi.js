@@ -156,7 +156,7 @@ function LSTMdEoverdWi(){
             </MathJaxContext>
 <p><span style={{fontSize:24.03}}><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</strong></span>OK now we have the equation expanded, we will have to turn each derivative within the term into a matrix.&nbsp;</p>
 
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Let us start with the first three terms</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Let us start with the first two terms</p>
 <MathJaxContext config={config} version={3}>
                     <MathJax inline>
                     {dEoverdG_j_final}
