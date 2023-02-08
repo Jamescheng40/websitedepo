@@ -6,6 +6,7 @@
 !/node_modules/better-react-mathjax/
 !/node_modules/mathjax-full/
 !/node_modules/react-minimal-side-navigation/
+!/node_modules/gh-pages
 /.pnp
 .pnp.js
 /package-lock.json
