@@ -1,8 +1,9 @@
 
 import React from 'react';
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
-import img1 from './JacobianMatrixfromPaper.JPG'
-import img2 from './gradientofsum.JPG'
+import img1 from './gradientofsum.JPG'
+import img2 from './JacobianMatrixfromPaper.JPG'
+
 
 function Gradientmatrix(){
 
