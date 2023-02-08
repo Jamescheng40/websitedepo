@@ -235,7 +235,7 @@ function Sidebarnav(){
 			}
 			else
 			{
-				window.location.href = websitedefaultsite + itemId;
+				window.location.href = websitedefaultsite + '/' + itemId;
 			}
 			//window.location.href = window.location.href + itemId.slice(1);	
 
@@ -312,6 +312,11 @@ function Sidebarnav(){
 			},
 			],
 		},
+		{
+			title: 'About Me',
+			itemId: 'about',
+
+		}
 		]}
 		
 	/>
@@ -351,12 +356,12 @@ function Fileinputbtn() {
 	)
 }
 
-var websitedefaultsite = window.location.href;
-var start = 2
-var delimiter = '/'
+var websitedefaultsite = window.location.origin;
+// var start = 2
+// var delimiter = '/'
 
-var tokens2 = websitedefaultsite.split(delimiter).slice(0, start),
-websitedefaultsite = tokens2.join(delimiter); // this
+// var tokens2 = websitedefaultsite.split(delimiter).slice(0, start),
+// websitedefaultsite = tokens2.join(delimiter); // this
 
 
 class ChartComponent extends React.Component {

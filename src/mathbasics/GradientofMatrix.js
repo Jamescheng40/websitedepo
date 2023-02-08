@@ -81,12 +81,19 @@ function Gradientmatrix(){
             
 <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;You might commonly see diag in the equation, what is diag. Diag is basically an identity matrix except the diagonal has been multiplied with a constant. For example <strong>diag(x1)</strong> with dimension <strong>3 X 3</strong> is basically</p>
 
-<MathJaxContext config={config} version={3}>
+            <MathJaxContext config={config} version={3}>
                 <MathJax inline>
                     {diagexample}
                 </MathJax>
             </MathJaxContext>
-<p>&nbsp;</p>
+            
+            <p><span style={{fontSize:"30px"}}><strong>Reference:</strong></span></p>
+            <ColoredLine color="#E3E3E3" />
+
+            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>1, The Matrix Calculus You Need For Deep Learning <a href="https://arxiv.org/pdf/1802.01528.pdf">link</a></p>
+
+            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>2, How Do You Find the Partial Derivative of a Function <a href="https://towardsdatascience.com/step-by-step-the-math-behind-neural-networks-ac15e178bbd">link</a></p>
+
 
         </div>
     )

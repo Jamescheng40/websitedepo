@@ -45,7 +45,7 @@ function Home(){
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;This website is for bookkeeping only from paper derivation for future reference and research</p>
 
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;A lot of websites such as <a href="https://towardsdatascience.com/tutorial-on-lstm-a-computational-perspective-f3417442c2cd">Manu Rastogi</a>,&nbsp;<a href="https://eli.thegreenplace.net/2016/the-softmax-function-and-its-derivative/">Eli Bendersky</a>,&nbsp;and&nbsp;<a href="https://towardsdatascience.com/back-to-basics-deriving-back-propagation-on-simple-rnn-lstm-feat-aidan-gomez-c7f286ba973d" rel="noopener follow">Jae Duk Seo</a> did a great job explaining the details of how LSTM is derived. Few have touched on how to turn them into a script or even explained how LSTM derivation is connected to the implementation itself. So in this article, we will focus on a fully detailed derivation as well as some of the connections it has to the python implementation. In the end, we will try a demonstration on python to see the training of a simple array and the prediction that it has.</p>
-
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Feel free to open up the implementation <a href={urlredirect.LSTMfullimple}>page</a> and follow along </p>
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;We will keep the original LSTM paper as a reference for&nbsp;<a href="http://www.bioinf.jku.at/publications/older/2604.pdf">Long Short-Term Memory(1997)</a>.</p>
 
             <p><img src={img3} /></p>
@@ -91,34 +91,45 @@ function Home(){
 
                     </MathJax>
                 </MathJaxContext>
-                <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;or according to the paper
-                </p>
-            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src={img4} /></p>
 
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Notice that the <strong>g(net cⱼ)/g(x) and h(x) from the above Appendix</strong>&nbsp;is the special case sigmoid function but we can use <strong>tanh(t)</strong> to represent the same thing since the&nbsp;<strong>g(net cⱼ)</strong>&nbsp;spans the same spectrum(refer to the graph above the value spans from <strong>[-2,2] </strong>or <strong>h(x)</strong> from <strong>[-1,1]</strong>) and <strong>tanh(t)</strong> value spans from<strong>[-1,1]</strong>.&nbsp;<strong>&sigma;t</strong> is represented as <strong>tanh(t)</strong> below.&nbsp;<strong>&otimes;</strong> represent the element-wise multiply</p>
 
             <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>4, the internal state activation between net input and net activation of output is</p>
+ 
+
             <MathJaxContext config={config} version={3}>
                 <MathJax inline>
                     {Cdtgeneral}
                 </MathJax>
             </MathJaxContext>
+
+
+
+
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5, the internal state (a state that spans across other memory cells) is </p>
+          
             <MathJaxContext config={config} version={3}>
                 <MathJax inline>
                     {Ctgeneral}
                 </MathJax>
             </MathJaxContext>
-            <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;or according to the paper
+
+            <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;or according to the LSTM paper
                 </p>
-            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src={img5} /></p>
+                <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src={img4} /></p>
 
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 6, the hidden state is computed as</p>
+
             <MathJaxContext config={config} version={3}>
                 <MathJax inline>
                     {htgeneral}
                 </MathJax>
             </MathJaxContext>
+            <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;or according to the LSTM paper
+                </p>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src={img5} /></p>
+
+  
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 7, Although the original paper did not state we should use a loss function, we should definitely use a loss function for computing a desired outcome. Here we would choose the <strong>Mean Square Error</strong> to compute a simple array matching. We would do other loss function for other tasks in other posts.</p>
 
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Notice L here represents the Logit function and it is acting as a intermediate hidden layer matrix. It is needed because we can use it to transform the hidden layer to a output layer where we can have our desired output dimension</p>
@@ -142,9 +153,12 @@ function Home(){
 
             <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>For an in-depth derivation of each function please click on the hyperlink.</p>
 
-            <p>&nbsp;</p>
+            <p><span style={{fontSize:"30px"}}><strong>Reference:</strong></span></p>
+            <ColoredLine color="#E3E3E3" />
 
-            <p>&nbsp;</p>
+            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>1, Long Short-Term Memory <a href="http://www.bioinf.jku.at/publications/older/2604.pdf">link</a></p>
+
+            <p><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</strong>2, How Do You Find the Partial Derivative of a Function <a href="https://towardsdatascience.com/step-by-step-the-math-behind-neural-networks-ac15e178bbd">link</a></p>
 
         </div>
     )

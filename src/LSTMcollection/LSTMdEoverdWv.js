@@ -1,5 +1,6 @@
 import React from 'react';
 import { MathJaxContext, MathJax } from 'better-react-mathjax';
+import * as urlredirect from './redirectutil'
 
 function LSTMdEoverdWv(){
     const config = {
@@ -46,7 +47,7 @@ function LSTMdEoverdWv(){
 
             <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Dimensionality: M is defined as a hidden unit number, N is the input element number, T is the output element number</p>
 
-            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;In the below function, you might find that the dot product&nbsp;<strong>⨀&nbsp;</strong>is replaced with&nbsp;<strong>&sum;a &otimes; b, a detailed explanation of why can be found <a href="http://a">here</a>&nbsp;</strong></p>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;In the below function, you might find that the dot product&nbsp;<strong>⨀&nbsp;</strong>is replaced with&nbsp;<strong>&sum;a &otimes; b, a detailed explanation of why can be found <a href={urlredirect.LSTMmathbasis}>here</a>&nbsp;</strong></p>
             <MathJaxContext config={config} version={3}>
                 <MathJax inline>
                     {Ftgeneral}

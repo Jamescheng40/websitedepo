@@ -6,3 +6,4 @@ export const Wvderivationpage =  window.location.origin + "/LSTMderivation/dEwrt
 export const derivationmainpage =  window.location.origin + "/LSTMderivation"
 export const LSTMfullimple =  window.location.origin + "/LSTMimplementation"
 export const LSTMbackwardexplained =  window.location.origin + "/LSTMBackward"
+export const LSTMmathbasis =  window.location.origin + "/mathbasics/Gradientmatrix"
