@@ -35,7 +35,7 @@ function Gradientmatrix(){
             <p>&nbsp;</p>
 
 
-            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This post will cover the basic math needed for all the LSTM posts you see above. Some equations below will be cropped based on the <a href="http://a">paper</a>.</p>
+            <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This post will cover the basic math needed for all the LSTM posts you see above. Some equations below will be cropped based on the <a href="https://arxiv.org/pdf/1802.01528.pdf">paper</a>.</p>
 
 <p>&nbsp;</p>
 
@@ -70,7 +70,7 @@ function Gradientmatrix(){
 
 <ColoredLine color="#E3E3E3" />
             
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;When dealing with matrix and their derivative, it will be imperative to know how. Here is the summary from the paper &lt;1802.01528.pdf&gt;.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;When dealing with matrix and their derivative, it will be imperative to know how. Here is the summary from the <a href="https://arxiv.org/pdf/1802.01528.pdf">paper</a> </p>
 
 <p><img src={img2}/></p>
 
