@@ -20,6 +20,7 @@ import LSTMfullimplementation from './LSTMcollection/LSTMfullimplementation'
 import LSTMdEoverdWv from './LSTMcollection/LSTMdEoverdWv'
 import LSTMbackward from './LSTMcollection/LSTMbackwardexplained'
 import Gradientmatrix  from './mathbasics/GradientofMatrix';
+import Aboutme from './LSTMcollection/Aboutmepage';
 // var fakedata = 
 // [{
 //     "date": "2010-01-04T05:00:00.000Z",
@@ -131,9 +132,7 @@ const datachange = (prop) => {
 };
 const About = () => (
 	<div class="body1">
-		<div>
-		<h2>About</h2>
-		</div>
+		<Aboutme/>
 	</div>
 );
 
