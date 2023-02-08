@@ -19,6 +19,7 @@ import LSTMdEoverdWo from './LSTMcollection/LSTMdEoverdWo'
 import LSTMfullimplementation from './LSTMcollection/LSTMfullimplementation'
 import LSTMdEoverdWv from './LSTMcollection/LSTMdEoverdWv'
 import LSTMbackward from './LSTMcollection/LSTMbackwardexplained'
+import Gradientmatrix  from './mathbasics/GradientofMatrix';
 // var fakedata = 
 // [{
 //     "date": "2010-01-04T05:00:00.000Z",
@@ -208,6 +209,16 @@ const LSTMbackwardroute = () => (
 
 	);
 
+const MathGradientmatrixroute = () =>
+(
+	<div class="body2">
+	
+		<Gradientmatrix/>
+	</div>
+
+
+);
+
 function Sidebarnav(){
 
 		return(
@@ -281,8 +292,15 @@ function Sidebarnav(){
 		},
 		{
 			title: 'Math Basics',
-			itemId: 'mathbasics',
-			elemBefore: () => <div name="users" />
+			itemId: '',
+			elemBefore: () => <div name="users" />,
+			subNav: [
+			{
+				title: 'Gradient Matrix Math',
+				itemId: 'mathbasics/Gradientmatrix',
+			},
+
+			],
 		},
 		{
 			title: 'Stock Market CSV parser for fun',
@@ -418,7 +436,7 @@ class ChartComponent extends React.Component {
 							{/* todo: add the default page here */}
 							<Route path='/' element={<><Sidebarnav/><About/></>} />
 							
-							<Route path='/mathbasics' element={<><Sidebarnav/><About/></>} />
+							<Route path='/mathbasics/Gradientmatrix' element={<><Sidebarnav/><MathGradientmatrixroute/></>} />
 							<Route path='/test' element={<><Sidebarnav/><Testforothestuff/></>} />
 							<Route path='*' element={<NotFound />}/>
 						</Routes>
