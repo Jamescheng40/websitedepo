@@ -1,369 +1,43 @@
-                                                           FULL Derivation of  ∂E/∂Wᵢ
-             The Related equation can be listed below or you can refer to the main page summary for the equation:
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; This post will cover the basic math needed for all the LSTM posts you see above. Some equations below will be cropped based on the <a href="http://a">paper</a>.</p>
 
-             Dimensionality: M is defined as a hidden unit number, N is the input element number, T is the output element number
+<p>&nbsp;</p>
 
-             In the below function, you might find that the dot product ⨀ is replaced with ∑a ⊗ b, a detailed explanation of why can be found here 
+<p><span style="font-size:20px">Explanation of summation over dot product and their derivative</span></p>
 
-                 Fₜ =  σs(∑Wf ⊗ xₜ + bias(optional)) = σs(∑Wf ⨀ xₜ + b(optional)), where σs is sigmoid
+<p>&nbsp;&lt;Insert dividing line for dot product summation explanation&gt;</p>
 
-                   iₜ = σs(∑Wᵢ ⊗ xₜ + bias(optional)) = σs(Wᵢ ⨀ xₜ + b(optional)) = σs(d), where d =  ∑Wᵢ ⊗ xₜ + b(optional), d1 = ∑d2, d2 = Wᵢ ⊗ xₜ
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; First of all, let us look at why dot-product&nbsp;<strong>⨀&nbsp;</strong>can be replaced with&nbsp;<strong>&sum;a &otimes; b</strong>.&nbsp;&nbsp;The answer is actually simpler than you think, let us look at an example below. Let us assume that <strong>a</strong> is a <strong>1xT</strong> matrix and <strong>b </strong>is a <strong>Tx1</strong> matrix.&nbsp;</p>
 
-             Oₜ = σs(∑Wₒ ⊗ xₜ + bias(optional)) = σs(Wₒ ⨀ xₜ + b(optional))
+<p>&lt;insert math formula here&gt;</p>
 
-             C'ₜ= σt(∑Wc ⊗ xₜ + bias(optional)) = σt(Wc ⨀ xₜ + b(optional)), where σt is tanh
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;As you can see above, if you were to multiply the matrix, which you have probably learned from your University Calculus course, the end result is a sum of the product from each element of the matrix. So it makes sense that it is a summation product of row and column. Let us write down the final result.</p>
 
-                   Cₜ = Fₜ ⊗ Cₜ₋₁ ⊕ iₜ ⊗ C'ₜ, where ⊕ is element-wise addition and ⊗ is element-wise addition and a = Fₜ ⊗ Cₜ₋₁    a1 = iₜ ⊗ C'ₜ
+<p>&lt;insert math formula here&gt;</p>
 
-             hₜ = Fₒ ⊗ σt(Cₜ) = Oₜ ⊗ b, where b = σt(Cₜ)
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;To find the derivative is simple. Let us look at what the paper stated.</p>
 
-                  Lᵢ = Wᵥ ⨀ hₜ  = ∑Wᵥ ⊗ hₜ + b(optional), where L1 = ∑(L2) ,and L2 = Wᵥ ⊗ hₜ
+<p>&lt;Insert image here&gt;</p>
 
-             Pᵢ = softmax(Lᵢ), where softmax = eᵃⁱ /  ∑eᵃᵏ
+<p>&nbsp;</p>
 
-             E = - ∑ Yᵢ ⊗ log(Pᵢ) = - ∑(g), for g =  Yᵢ ⊗ log(Pᵢ)
+<p>&nbsp;</p>
 
-             As you can see from above, the Wᵢ is related to several other components in the equations from hₜ down to Fᵢ. Specifically, we can use one notation to summarize the dependency, ∂E(Pi, Lᵢ, hₜ, Cₜ, Fᵢ, Fcₜ₋₁)/∂Wᵢ
+<p><span style="font-size:20px">Explanation of Matrix Jacobian or partial derivative of a matrix</span></p>
 
-             With the above information, it would be enough to write down the entire equation. So let us write down the entire equation:
+<p>&nbsp;&lt;Insert dividing line for dot product summation explanation&gt;</p>
 
-             ∂E(Pi, Lᵢ, hₜ, Cₜ, Fᵢ, Fcₜ₋₁)/∂Wᵢ = ∂E/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂hₜ ⨀ ∂hₜ/∂Cₜ ⨀ ∂Cₜ/∂Fcₜ  
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;When dealing with matrix and their derivative, it will be imperative to know how. Here is the summary from the paper &lt;1802.01528.pdf&gt;.</p>
 
-             = ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ (∂hₜ/∂Fₒ ⨀ ∂Fₒ/∂Wᵢ ⊕ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ( ∂Cₜ/∂a ⨀ (  ∂a/∂Cₜ₋₁ ⨀ ∂Cₜ₋₁/∂Wᵢ ⊕ ∂a/∂Fₜ ⨀ ∂Fₜ/∂Wᵢ ) ⊕  ∂Cₜ/∂a1 ⨀ ( ∂a1/∂iₜ ⨀ ∂iₜ/∂d ⨀ ∂d/∂d1 ⨀ ∂d1/∂d2 ⨀ ( ∂d2/∂Wᵢ ⊕ ∂d2/∂xₜ) ⊕ ∂a1/∂C'ₜ ⨀ ∂C'ₜ/∂Wᵢ))
+<p>&lt;Insert image here&gt;</p>
 
-             Don't be confused and scared by the convoluted equation above, some of the terms will become 0 and can be ignored safely. Let us continue to simplify the equation
+<p>&nbsp;</p>
 
-             = ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ (∂hₜ/∂Fₒ ⨀ ∂Fₒ/∂Wᵢ + ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ( ∂Cₜ/∂a ⨀ (  ∂a/∂Cₜ₋₁ ⨀ ∂Cₜ₋₁/∂Wᵢ ⊕ ∂a/∂Fₜ ⨀ ∂Fₜ/∂Wᵢ ) ⊕  ∂Cₜ/∂a1 ⨀ ( ∂a1/∂iₜ ⨀ ∂iₜ/∂d ⨀ ∂d/∂d1 ⨀ ∂d1/∂d2 ⨀ ( ∂d2/∂Wᵢ ⊕ ∂d2/∂xₜ) ⊕ ∂a1/∂C'ₜ ⨀ ∂C'ₜ/∂Wᵢ))
+<p><span style="font-size:20px">Some common glossaries used on the derivation page</span></p>
 
-            ∂hₜ/∂Fₒ ⨀ ∂Fₒ/∂Wᵢ = 0 since there is no Wi in Fₒ. It is the same for others, just look it up in the equations above.
+<p><span style="font-size:20px">&nbsp;</span>&lt;Insert dividing line for glossaries explanation&gt;</p>
 
-            = ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a ⨀ ∂a/∂Cₜ₋₁ ⨀ ∂Cₜ₋₁/∂Wᵢ ⊕ ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a1 ⨀ ∂a1/∂iₜ ⨀ ∂iₜ/∂d ⨀ ∂d/∂d1 ⨀ ∂d1/∂d2 ⨀ ∂d2/∂Wᵢ
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;You might commonly see diag in the equation, what is diag. Diag is basically an identity matrix except the diagonal has been multiplied with a constant. For example diag(x1) is basically</p>
 
-          Notice above that the giant term before the element-wise ⊕ could be expanded into several terms depending on the time steps we have. For example, t = 4 could be expanded into 3 terms. And the giant term on the right is a constant, even if the time step only has 1 or t = 1. We will have an example for timestep = 1 implementation demonstration below. For timestep = 1, the formula is
+<p>&lt;insert math equations here&gt;</p>
 
-∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a1 ⨀ ∂a1/∂iₜ ⨀ ∂iₜ/∂d ⨀ ∂d/∂d1 ⨀ ∂d1/∂d2 ⨀ ∂d2/∂Wᵢ
-
-         OK now we have the equation expanded, we will have to turn each derivative within the term into a matrix. 
-
-             Let us start with the first term
-
- ∂E/∂g = ∂(- ∑(g)) /∂g =  [1, 1, 1, ........, 1 ]  ∈ 1 x T
-
-                                                                                    「  Y₁ * log(P₁)    ⌉          「 ∂( Y₁ * log(P₁) ) /   ∂P₁ ,  ∂( Y₁ * log(P₁) ) /   ∂P₂  .... ∂( Y₁ * log(P₁) ) /   ∂PT   ⌉
-
-                                                                                       |    Y₂ * log(P₂)    |               |   ∂( Y₂ * log(P₂) ) /   ∂P₁ ,  ∂( Y₂ * log(P₂) ) /   ∂P₂  .... ∂( Y₂ * log(P₂) ) /   ∂PT  |                                                                                                                    |                                                       .                                                                      |
-
-                                                                  .                              = |                                                       .                                                                     |   
-
-∂g/∂Pᵢ = ∂(Yᵢ ⊗ log(Pᵢ))/∂Pᵢ =   ∂        .                        /∂Pᵢ       |                                                      .                                                                       |
-
-                                                                  .                                 |                                                         .                                                                    |
-
-                                                            ⌊   YT * log(PT)    」          ⌊    ∂( YT * log(PT) ) /   ∂P₁ ,  ∂( YT * log(PT) ) /   ∂P₂  .... ∂( YT * log(PT) ) /   ∂PT   」
-
-
-
-                                                     = diag(Yᵢ/Pᵢ) ∈ T x T
-
-
-
-                                                   ∂( Y₁ * log(P₁) ) /   ∂P₁  =  Y₁ / P₁  since derivative of ln(x) = 1 / x, here we treat log base is natural
-
-                                                                          ∂( Y₁ * log(P₁) ) /   ∂P₂  = 0
-
-                                                                          
-
-                           「eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ⌉                「 ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₁ ,  ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₂  .... ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂LT        ⌉
-
-                       |  eᴸ² / (eᴸ¹ + eᴸ² + .... + eᴸᵀ) |                   |   ∂( eᴸ² / (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₁ ,  ∂( eᴸ² / (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₂  .... ∂( eᴸ² / (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂LT        | 
-
-∂Pᵢ/∂Lᵢ = ∂Pᵢ |                 .                             |   / ∂Lᵢ  =    |                                                       .                                                                                                                                                   |
-
-                       |                 .                             |                   |                                                       .                                                                                                                                                  |
-
-                      ⌊  eᴸᵀ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ)」                 ⌊    ∂( eᴸᵀ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₁ ,  ∂(eᴸᵀ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ)) ) /   ∂L₂  .... ∂( eᴸᵀ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂LT   」
-
-
-
-           Let us start with the top example ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₁ = P₁(1 - P₁)
-
-                 since the quotient rule is: 
-
-                         f(x) = eᴸ¹ ; g(x) = ∑eᵃᵏ; f'(x) = ∂eᴸ¹ / ∂L₁ = eᴸ¹ (exponent derivative rule); g'(x) =∂eᵃᵏ /∂L₁ = ∂(eᴸ¹ + eᴸ² + .... + eᴸᵀ) / ∂L₁ = eᴸ¹
-
-                         (g(x) f'(x) - f(x) g'(x)) / (g(x))² =  (∑eᵃᵏ * eᴸ¹ - eᴸ¹ * eᴸ¹) / (∑eᵃᵏ)² = eᴸ¹ / ∑eᵃᵏ  -   eᴸ¹ * eᴸ¹ / (∑eᵃᵏ)² = P₁ - (P₁)² = P₁(1 - P₁) 
-
-                            
-
-                Next is the non-diagonal example ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₂ = P₁(1 - P₁)
-
-
-
-                         f(x) = eᴸ¹ ; g(x) = ∑eᵃᵏ; f'(x) = ∂eᴸ¹ / ∂L₂ = 0 ; g'(x) =∂eᵃᵏ /∂L₂ = ∂(eᴸ¹ + eᴸ² + .... + eᴸᵀ) / ∂L₂ = eᴸ²
-
-                         (g(x) f'(x) - f(x) g'(x)) / (g(x))² =  (0 - eᴸ¹ * eᴸ²) / (∑eᵃᵏ)² =   -  eᴸ¹ * eᴸ² / (∑eᵃᵏ)² =  - (P₁)(P₂) = - (P₁)(P₂) 
-
-                 Finally we can have our output, for another derivation that based on shorten symbol, you can check out this post by Eli
-
-                                          「 ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₁ ,  ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₂  .... ∂( eᴸ¹ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂LT      ⌉       「 P₁(1 - P₁),  - (P₁)(P₂)   .... -(P₁)(PT)     ⌉
-
-                                      |   ∂( eᴸ² / (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₁ ,  ∂( eᴸ² / (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₂  .... ∂( eᴸ² / (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂LT        |              |   -(P₂)(P₁),  P₂(1 - P₂)  .... -(P₂)(PT)       | 
-
-∂Pᵢ/∂Lᵢ = ∂ᵢ  =              |                                                       .                                                                                                                                             |  =     |                           .                                   |   =    Pᵢ(& - Pj), where i is row, j is column. & is 1 when i = j   ∈ T x T
-
-                                      |                                                       .                                                                                                                                             |           |                           .                                   |
-
-                                     ⌊    ∂( eᴸᵀ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂L₁ ,  ∂(eᴸᵀ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ)) ) /   ∂L₂  .... ∂( eᴸᵀ /  (eᴸ¹ + eᴸ² + .... + eᴸᵀ) ) /   ∂LT    」        ⌊  -(PT)(P₁) ,  -(PT)(P₂)   .... PT(1 - PT)               」
-
-
-
-
-
-          Since the below subscript of L1 is the row number of the TxT scalar
-
-          Recall that 
-
-       ∂Lᵢ/∂L1₁    =   1
-
-       Notice the dimension of Wv is TXM because we can T output and M is the vector size of the hidden layer
-
-       ∂L1₁/∂L2₁  =  [1,1 ........ 1] ∈ 1 x T; ∂L1₂/∂L2₂ = [1,1 ....... 1] ∈ 1 x T   .................  ∂L1T/∂L2T     ∈ 1 x T
-
-                                 「Wv₁₁ * h₁  ⌉             「       ∂( Wv₁₁ * h₁ ) / ∂h₁ ,  ∂( Wv₁₁ * h₁  ) /   ∂h₂  .... ∂( Wv₁₁ * h₁ ) /   ∂hT  ⌉       「  Wv₁₁, 0, ............, 0     ⌉
-
-                                    | Wv₁₂ * h₂ |               | ∂( Wv₁₂ * h₂ ) / ∂h₁ ,  ∂( Wv₁₂ * h₂  ) /   ∂h₂  .... ∂( Wv₁₂ * h₂ ) /   ∂h₂               |         |   0   ,Wv₁₂,............,0    |  
-
-          ∂L2₁/∂hₜ     =    ∂ |         .         | /∂hₜ =    |                                                         .                                                            |   =    |                 .                   |
-
-                                                   |          .         |              |                                                         .                                                            |         |                .                    |
-
-                                                ⌊   Wv₁M * hM 」            ⌊∂( Wv₁M * hT ) / ∂h₁ ,  ∂( Wv₁M * hT  ) /   ∂h₂  .... ∂( Wv₁M * hT ) /   ∂hM               」        ⌊   0   , 0, .............. Wv₁ M」
-
-
-
-                             「Wv₂₁ * h₁  ⌉                「 ∂( Wv₂₁ * h₁ ) / ∂h₁ ,  ∂( Wv₂₁ * h₂  ) /   ∂h₂  .... ∂( Wv₂₁ * hT ) /   ∂hT  ⌉          「  Wv₂₁, 0, ............, 0     ⌉
-
-                                | Wv₂₂ * h₂ |                  | ∂( Wv₂₂ * h₁ ) / ∂h₁ ,  ∂( Wv₂₂ * h₂  ) /   ∂h₂  .... ∂( Wv₂₂ * hT ) /   ∂hT      |            |   0   ,Wv₂₂,............,0    |  
-
-          ∂L2₂/∂hₜ  =   ∂ |         .         | /∂hₜ  =      |                                                         .                                                       |   =       |                 .                   |
-
-                                             |          .        |                  |                                                 .                                                               |            |                .                     |
-
-                                           ⌊  Wv₂M * hM 」                     ⌊∂( Wv₂M * h₁ ) / ∂h₁ ,  ∂( Wv₂M * h₁  ) /   ∂h₂  .... ∂( Wv₂M * h₁ ) /   ∂hM  」          ⌊   0   , 0, .............. Wv₂M」
-
-
-
-
-
-                                                                                                     
-
-                                                                                                              「  Wv₁₁, 0, ............, 0     ⌉
-
-                                                                                                                  |   0   ,Wv₁₂,............,0     |  
-
-       ∂L1₁/∂L2₁ * ∂L2₁/∂hₜ =  [1,1 ........ 1]   ⨀     |                 .                    |   =    [Wv₁₁, Wv₁₂ .......... Wv₁T ]
-
-                                                                                                                  |                .                    |
-
-                                                                                                                 ⌊   0   , 0, .............. Wv₁M」
-
-
-
-
-
-                                                                                                                 「  Wv₂₁, 0, ............, 0     ⌉
-
-                                                                                                                    |   0   ,Wv₂₂,............,0     |  
-
-        ∂L1₂/∂L2₂ * ∂L2₂/∂hₜ =  [1,1 ........ 1]   ⨀      |                 .                    |   =    [Wv₂₁, Wv₂₂ .......... Wv₂T ]
-
-                                                                                                                    |                .                     |
-
-                                                                                                                    ⌊   0   , 0, .............. Wv₂M               」
-
-            so after the above deduction, we can conclude that  ∂L2ᵢ/∂hₜ                    
-
-                                    [Wv₁₁, Wv₁₂ .......... Wv₁M ]
-
-                                   [Wv₂₁, Wv₂₂ .......... Wv₂M]
-
-∂L2ᵢ/∂hₜ =                       .                           =  Wv
-
-                                   [WvT₁, WvT₂ .......... WvTM]
-
-
-
-
-
-                                「    O₁ * b₁   ⌉                      「 ∂( O₁ * b₁ ) /   ∂b₁ ,  ∂( Y₁ * log(P₁) ) /   ∂b₂  .... ∂( Y₁ * log(P₁) ) /   ∂bT       ⌉
-
-                                   |    O₂ * b₂    |                           |   ∂( Y₂ * log(P₂) ) /   ∂P₁ ,  ∂( O₂ * b₂  ) /   ∂b₂  .... ∂( O₂ * b₂  ) /   ∂bT             |   
-
-∂hₜ/∂b  =       ∂   |         .        |   /∂b₁    =       |                                                       .                                                                  |  = diag(Oₜ)
-
-                        |         .        |                        |                                                        .                                                                 |  
-
-                        ⌊   OT * bT    」                      ⌊    ∂( OT * bT ) /   ∂b₁ ,  ∂( OT * bT ) /   ∂b₂           ....     ∂( OT * bT ) /   ∂bT                   」 
-
-
-
-
-
-
-
-                                「    tanh(C₁)    ⌉              「 ∂( tanh(C₁) ) /   ∂b₁ ,  ∂( tanh(C₁) ) /   ∂b₂  .... ∂( tanh(C₁) ) /   ∂bT                   ⌉
-
-                                   |    tanh(C₂)      |                   |   ∂(  tanh(C₂) ) /   ∂P₁ ,  ∂(  tanh(C₂)  ) /   ∂b₂  .... ∂(  tanh(C₂)  ) /   ∂bT               |   
-
-∂b/∂Cₜ  =       ∂   |         .            |  /∂CT =   |                                                       .                                                                       |  = diag(1 - tanh²(Cₜ))
-
-                        |         .             |               |                                                        .                                                                      |  
-
-                        ⌊   tanh(CM)     」              ⌊    ∂( tanh(CM) ) /   ∂b₁ ,  ∂( tanh(CM) ) /   ∂b₂           ....     ∂( tanh(CM) ) /   ∂bM      」 
-
-
-
-∂Cₜ/∂a1 =  ∂(a + a1 )/∂a1 = 1
-
-
-
-                                「   i₁ * C'₁   ⌉              「 ∂(  i₁ * C'₁  ) /   ∂i₁ ,  ∂(  i₁ * C'₁  ) /   ∂i₂  .... ∂(  i₁ * C'₁  ) /   ∂iT                   ⌉
-
-                                   |    i₂ * C'₂    |                   |   ∂(  i₂ * C'₂ ) /   ∂i₁ ,  ∂(  i₂ * C'₂  ) /   ∂i₂  .... ∂(  i₂ * C'₂  ) /   ∂iT                              |   
-
-∂a1/∂iₜ  =       ∂  |         .        |  /∂iₜ =    |                                                       .                                                             |  = diag(C'ₜ)
-
-                        |         .        |              |                                                        .                                                             |  
-
-                        ⌊   iM * C'M    」            ⌊    ∂(  iM * C'M ) /   ∂i₁ ,  ∂(  iM * C'M ) /   ∂i₂           ....     ∂( t iM * C'M ) /   ∂iM          」 
-
-
-
-
-
-∂iₜ/∂d =  1
-
-
-
-                                「    sigmoid(d₁)     ⌉              「 ∂( sigmoid(d₁) ) /   ∂d₁ ,  ∂( sigmoid(d₁) ) /   ∂d₂  .... ∂( sigmoid(d₁) ) /   ∂dM                        ⌉
-
-                                   |     sigmoid(d₂)      |                   |   ∂(  sigmoid(d₂) ) /   ∂d₁ ,  ∂(  sigmoid(d₂) ) /   ∂d₂  .... ∂( sigmoid(d₂)  ) /   ∂dM                      |   
-
-∂iₜ/∂d   =       ∂   |         .                   |  /∂dₜ =    |                                                       .                                                                                             |  = diag(sigmoid(dₜ)*(1-  sigmoid(dₜ) ))
-
-                        |         .                   |                |                                                        .                                                                                            |  
-
-                        ⌊    sigmoid(dM)     」              ⌊    ∂(  sigmoid(dM)  ) /   ∂d₁ ,  ∂(  sigmoid(dM)  ) /   ∂d₂           ....     ∂(  sigmoid(dM)  ) /   ∂dM       」 
-
-
-
-                       eg, ∂( sigmoid(d₁) ) /   ∂d₁  =  sigmoid(d₁)*(1-  sigmoid(d₁) 
-
-
-
-Notice the dimension of Wv is TXM because we can T output and M is the vector size of the hidden layer
-
-∂d/∂d1  = 1
-
-∂d/∂d1  =  [1,1 ........ 1] ∈ 1 x T; ∂L1₂/∂L2₂ = [1,1 ....... 1] ∈ 1 x T   .................  ∂L1T/∂L2T     ∈ 1 x T
-
-
-
-                      「Wᵢ₁₁ * x₁   ⌉               「 ∂( Wᵢ₁₁ * x₁ ) / ∂Wᵢ₁₁ ,  ∂( Wᵢ₁₁ * x₂  ) /   ∂W₁₂  .... ∂( Wᵢ₁₁ * xT ) /   ∂WMN  ⌉          「  x₁, 0, ............, 0,0, .......... 0                     ⌉
-
-                        | Wᵢ₁₂ * x₂   |                 | ∂( Wᵢ₁₂ * x₂ ) / ∂Wᵢ₁₁ ,  ∂( Wᵢ₁₂ * x₂  ) /   ∂Wᵢ₁₁  .... ∂( Wᵢ₁₂ * x₂ ) /   ∂WMN   |            |   0   ,x₂,............,0,0,              .......... 0       |  
-
-∂d2₁/∂Wᵢ  =  ∂|         .          | /∂Wᵢ  =  |                                                         .                                                             |   =       |                 . ............................                     |
-
-                                   |          .         |                      |                                                         .                                                             |            |                .            ..................                    |
-
-                                  ⌊   Wᵢ₁N * xN 」                    ⌊∂( Wᵢ₁M * xM ) / ∂W₁ ,  ∂( Wᵢ₁M * xM  ) /   ∂W₂  .... ∂( Wᵢ₁M * xM ) /   ∂WMN      」          ⌊   0   , 0, .............. xM,0, .......... 0                」
-
-
-
-
-
-                      「Wᵢ₂₁ * x₁   ⌉               「 ∂( Wᵢ₂₁ * x₁ ) / ∂Wᵢ₁₁ ,  ∂( Wᵢ₂₁ * x₂  ) /   ∂W₁₂  .... ∂( Wᵢ₂₁ * xT ) /   ∂WMN  ⌉          「 0..... 0, x₁, 0, ............, 0        ,0..................0      ⌉
-
-                        | Wᵢ₂₂ * x₂   |                 | ∂( Wᵢ₂₂ * x₂ ) / ∂Wᵢ₁₁ ,  ∂( Wᵢ₂₂ * x₂  ) /   ∂Wᵢ₁₁  .... ∂( Wᵢ₂₂ * x₂ ) /   ∂WMN    |            | 0..... 0.....  0                           ,x₂,............,0        |  
-
-∂d2₂/∂Wᵢ  =  ∂|         .         | /∂Wᵢ    = |                                                         .                                                             |   =        |                 .                                                        |
-
-                                   |          .         |                       |                                                         .                                                            |              |                .                                                        |
-
-                                  ⌊   Wᵢ₂M * xM   」                  ⌊∂( Wᵢ₂M * xM ) / ∂W₁ ,  ∂( Wᵢ₂M * xM  ) /   ∂W₂  .... ∂( Wᵢ₂M * xM ) /   ∂WMN      」            ⌊  0..... 0 0   , 0,                       ..... xM..0.....0........」
-
-
-
-Above is all for the requirement we need to compute the first time step, let us try to compute the for some longer timestep in order to find the pattern within it
-
-Let us try a timestep = 3 and see how backpropagation could expand
-
-∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ (∂hₜ/∂Fₒ ⨀ ∂Fₒ/∂Wᵢ + ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ( ∂Cₜ/∂a ⨀ (  ∂a/∂Cₜ₋₁ ⨀ ∂Cₜ₋₁/∂Wᵢ ⊕ ∂a/∂Fₜ ⨀ ∂Fₜ/∂Wᵢ ) ⊕  ∂Cₜ/∂a1 ⨀ ( ∂a1/∂iₜ ⨀ ∂iₜ/∂d ⨀ ∂d/∂d1 ⨀ ∂d1/∂d2 ⨀ ( ∂d2/∂Wᵢ ⊕ ∂d2/∂xₜ) ⊕ ∂a1/∂C'ₜ ⨀ ∂C'ₜ/∂Wᵢ))
-
-∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a ⨀ ∂a/∂Cₜ₋₁ ⨀  (∂Cₜ₋₁/∂aₜ₋₁⨀   ∂aₜ₋₁/∂Cₜ₋₂ ⨀ (∂Cₜ₋₂/∂aₜ₋₂ ⨀ ∂aₜ₋₂/∂Cₜ₋₃ (∂Cₜ₋₃/∂aₜ₋₃ ⨀  ∂aₜ₋₃/∂Cₜ₋₄ ⊕ ∂Cₜ₋₃/∂a1ₜ₋₃ ⨀ ∂a1ₜ₋₃/∂iₜ₋₃ ⨀ ∂iₜ₋₃/∂dₜ₋₃ ⨀ ∂dₜ₋₃/∂d1ₜ₋₃ ⨀ ∂d1ₜ₋₃/∂d2ₜ₋₃ ⨀ ∂d2ₜ₋₃/∂Wᵢₜ₋₃) ⊕ ∂Cₜ₋₂/∂a1ₜ₋₂ ⨀ ∂a1ₜ₋₂/∂iₜ₋₂ ⨀ ∂iₜ₋₂/∂dₜ₋₂ ⨀ ∂dₜ₋₂/∂d1ₜ₋₂ ⨀ ∂d1ₜ₋₂/∂d2ₜ₋₂ ⨀ ∂d2ₜ₋₂/∂Wᵢₜ₋₂ ) ⊕ ∂Cₜ₋₁/∂a1ₜ₋₁ ⨀ ∂a1ₜ₋₁/∂iₜ₋₁ ⨀ ∂iₜ₋₁/∂dₜ₋₁ ⨀ ∂dₜ₋₁/∂d1ₜ₋₁ ⨀ ∂d1ₜ₋₁/∂d2ₜ₋₁ ⨀ ∂d2ₜ₋₁/∂Wᵢₜ₋₁ )⊕ ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a1 ⨀ ∂a1/∂iₜ ⨀ ∂iₜ/∂d ⨀ ∂d/∂d1 ⨀ ∂d1/∂d2 ⨀ ∂d2/∂Wᵢ
-
-Notice there is a term crossed out above because there won't be a 4th timestep in this case. So let us expand this out:
-
-∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a ⨀ ∂a/∂Cₜ₋₁ ⨀  ∂Cₜ₋₁/∂aₜ₋₁⨀   ∂aₜ₋₁/∂Cₜ₋₂ ⨀ ∂Cₜ₋₂/∂aₜ₋₂ ⨀ ∂aₜ₋₂/∂Cₜ₋₃ ⨀ ∂Cₜ₋₃/∂a1ₜ₋₃ ⨀ ∂a1ₜ₋₃/∂iₜ₋₃ ⨀ ∂iₜ₋₃/∂dₜ₋₃ ⨀ ∂dₜ₋₃/∂d1ₜ₋₃ ⨀ ∂d1ₜ₋₃/∂d2ₜ₋₃ ⨀ ∂d2ₜ₋₃/∂Wᵢₜ₋₃ ⊕ ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a ⨀ ∂a/∂Cₜ₋₁ ⨀  ∂Cₜ₋₁/∂aₜ₋₁⨀   ∂aₜ₋₁/∂Cₜ₋₂ ⨀ ∂Cₜ₋₂/∂a1ₜ₋₂ ⨀ ∂a1ₜ₋₂/∂iₜ₋₂ ⨀ ∂iₜ₋₂/∂dₜ₋₂ ⨀ ∂dₜ₋₂/∂d1ₜ₋₂ ⨀ ∂d1ₜ₋₂/∂d2ₜ₋₂ ⨀ ∂d2ₜ₋₂/∂Wᵢₜ₋₂ ⊕ ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a ⨀ ∂a/∂Cₜ₋₁ ⨀ ∂Cₜ₋₁/∂a1ₜ₋₁ ⨀ ∂a1ₜ₋₁/∂iₜ₋₁ ⨀ ∂iₜ₋₁/∂dₜ₋₁ ⨀ ∂dₜ₋₁/∂d1ₜ₋₁ ⨀ ∂d1ₜ₋₁/∂d2ₜ₋₁ ⨀ ∂d2ₜ₋₁/∂Wᵢₜ₋₁ ⊕ ∂E/∂g ⨀ ∂g/∂Pᵢ ⨀ ∂Pᵢ/∂Lᵢ ⨀ ∂Lᵢ/∂L1 ⨀ ∂L1ᵢ/∂L2ᵢ ⨀ ∂L2ᵢ/∂hₜ ⨀ ∂L2/∂hₜ ⨀ ∂hₜ/∂b ⨀ ∂b/∂Cₜ ⨀ ∂Cₜ/∂a1 ⨀ ∂a1/∂iₜ ⨀ ∂iₜ/∂d ⨀ ∂d/∂d1 ⨀ ∂d1/∂d2 ⨀ ∂d2/∂Wᵢ
-
-
-
-The Green highlighted above shows the new computation term for each new backpropagation time step. Notice that there is only one new term added for each time step we go back so let us just compute those and we should be good because all other terms have already been computed from the previous step. The terms highlighted in Purple are the terms computed in the previous time step and should have already been saved.  So let us just compute the green terms, only the first two terms would be
-
-
-
-                                「    a₁ + a1₁   ⌉                      「 ∂( a₁ + a1₁ ) /   ∂a₁ ,  ∂( a₁ + a1₁ ) /   ∂a₂       .... ∂( a₁ + a1₁ ) /   ∂aT             ⌉
-
-                                   |    a₂ + a1₂     |                           |   ∂(   a₂ + a1₂ ) /   ∂a₁ ,  ∂(   a₂ + a1₂ ) /   ∂a₂  .... ∂( O₂ * b₂  ) /   ∂aT               |   
-
-∂Cₜ/∂a  =       ∂   |         .          |   /∂a    =         |                                                       .                                                                 |  = diag(1)
-
-                        |         .          |                        |                                                        .                                                                |  
-
-                        ⌊   aT + a1T    」                       ⌊    ∂(  aT + a1T ) /   ∂a₁ ,  ∂(  aT + a1T ) /   ∂a₂           ....     ∂( aT + a1T ) /   ∂aT    」 
-
-
-
-                                   eg, ∂dd( a₁ + a1₁ ) /   ∂a₁ = 1
-
-
-
-                                「    Fₜ₁ + Cₜ₋₁₁   ⌉                      「 ∂( Fₜ₁ + Cₜ₋₁₁  ) /   ∂Cₜ₋₁ ,  ∂( Y₁ * log(P₁) ) /   ∂b₂  .... ∂( Y₁ * log(P₁) ) /   ∂bT      ⌉
-
-                                   |    Fₜ₂ + Cₜ₋₁₂     |                           |   ∂( Y₂ * log(P₂) ) /   ∂P₁ ,  ∂( Fₜ₂ + Cₜ₋₁₂  ) /   ∂Cₜ₋₁₂  .... ∂( O₂ * b₂  ) /   ∂bT          |   
-
-∂a/∂Cₜ₋₁   =   ∂  |         .             |   /∂Cₜ₋₁    =      |                                                       .                                                                      |  = diag(Fₜ)
-
-                        |         .             |                        |                                                        .                                                                     |  
-
-                        ⌊   Fₜ₂T + Cₜ₋₁T   」                       ⌊    ∂( OT * bT ) /   ∂b₁ ,  ∂( OT * bT ) /   ∂b₂           ....     ∂( Fₜ₂T + Cₜ₋₁T ) /   ∂aT                  」 
-
-
-
-
-
-
-
-                                「    Fₜ₋₁₁ + Cₜ₋₂₁  ⌉                      「 ∂( Fₜ₋₁₁ + Cₜ₋₂₁ ) /   ∂Cₜ₋₁₁ ,  ∂( Fₜ₋₁₁ + Cₜ₋₂₁ ) /   ∂Cₜ₋₁₂  .... ∂( Fₜ₋₁₁ + Cₜ₋₂₁  ) /   ∂Cₜ₋₁T      ⌉
-
-                                   |    Fₜ₋₁₂ + Cₜ₋₂₂   |                           |   ∂( Fₜ₋₁₂ + Cₜ₋₂₂  ) / ∂Cₜ₋₁₁ ,  ∂(Fₜ₋₁₂ + Cₜ₋₂₂  ) /   ∂Cₜ₋₁₂  .... ∂( Fₜ₋₁₂ + Cₜ₋₂₂  ) /   ∂Cₜ₋₁T      |   
-
-∂aₜ₋₁/∂Cₜ₋₂  = ∂ |         .             |   /∂Cₜ₋₂    =      |                                                       .                                                                              |  = diag(Fₜ₋₁)
-
-                        |         .             |                        |                                                        .                                                                             |  
-
-                        ⌊   Fₜ₋₁T + Cₜ₋₂T   」                       ⌊    ∂( Fₜ₋₁T + Cₜ₋₂T ) / ∂Cₜ₋₁₁ ,  ∂( Fₜ₋₁T + Cₜ₋₂T ) / ∂Cₜ₋₁₂      ....     ∂( Fₜ₋₁T + Cₜ₋₂T ) /  ∂Cₜ₋₁T         」 
-
-
-
-
-
-                                                                                                             Following this logic, the new step can be deduced to 
-
-
-
-∂aₜ₋ᵢ/∂Cₜ₋ᵢ₋₁  = diag(Fₜ₋ᵢ)
-
-
-
+<p>&nbsp;</p>

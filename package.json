@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "homepage": "http://jamescheng40.github.io/#",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -46,7 +47,6 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "lodash.flattendeep": "^4.4.0",
-    "mathjax-full": "^3.2.2",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
@@ -80,6 +80,8 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
@@ -102,6 +104,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "react-minimal-side-navigation": "^1.9.2"
   },
   "jest": {
