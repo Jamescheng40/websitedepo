@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.e4c5ec1d.css",
-    "main.js": "/static/js/main.311fb2fd.js",
-    "static/media/JacobianMatrixfromPaper.JPG": "/static/media/JacobianMatrixfromPaper.4ea1fda89b00a42fb1ad.JPG",
-    "static/media/LSTMcellarchitecture.JPG": "/static/media/LSTMcellarchitecture.4a9569837e35f60a2016.JPG",
-    "static/media/LSTMappendixA.JPG": "/static/media/LSTMappendixA.7d71edc918cface1c8a8.JPG",
-    "static/media/gradientofsum.JPG": "/static/media/gradientofsum.dbd4a8b21ad4f26a1796.JPG",
-    "static/media/gorhdef.JPG": "/static/media/gorhdef.3bb57da396cbc8f96169.JPG",
-    "static/media/internalstate.JPG": "/static/media/internalstate.67c834a79001bc7b2e38.JPG",
-    "static/media/LSTMhiddenstate.JPG": "/static/media/LSTMhiddenstate.7e51ac2ef60a9e2d6474.JPG",
-    "index.html": "/index.html",
-    "main.e4c5ec1d.css.map": "/static/css/main.e4c5ec1d.css.map",
-    "main.311fb2fd.js.map": "/static/js/main.311fb2fd.js.map"
+    "main.css": "/websitedepo/static/css/main.e4c5ec1d.css",
+    "main.js": "/websitedepo/static/js/main.0ab2600c.js",
+    "static/media/JacobianMatrixfromPaper.JPG": "/websitedepo/static/media/JacobianMatrixfromPaper.4ea1fda89b00a42fb1ad.JPG",
+    "static/media/LSTMcellarchitecture.JPG": "/websitedepo/static/media/LSTMcellarchitecture.4a9569837e35f60a2016.JPG",
+    "static/media/LSTMappendixA.JPG": "/websitedepo/static/media/LSTMappendixA.7d71edc918cface1c8a8.JPG",
+    "static/media/gradientofsum.JPG": "/websitedepo/static/media/gradientofsum.dbd4a8b21ad4f26a1796.JPG",
+    "static/media/gorhdef.JPG": "/websitedepo/static/media/gorhdef.3bb57da396cbc8f96169.JPG",
+    "static/media/internalstate.JPG": "/websitedepo/static/media/internalstate.67c834a79001bc7b2e38.JPG",
+    "static/media/LSTMhiddenstate.JPG": "/websitedepo/static/media/LSTMhiddenstate.7e51ac2ef60a9e2d6474.JPG",
+    "index.html": "/websitedepo/index.html",
+    "main.e4c5ec1d.css.map": "/websitedepo/static/css/main.e4c5ec1d.css.map",
+    "main.0ab2600c.js.map": "/websitedepo/static/js/main.0ab2600c.js.map"
   },
   "entrypoints": [
     "static/css/main.e4c5ec1d.css",
-    "static/js/main.311fb2fd.js"
+    "static/js/main.0ab2600c.js"
   ]
 }
